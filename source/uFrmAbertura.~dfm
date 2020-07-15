@@ -1,8 +1,8 @@
-object Form1: TForm1
-  Left = 463
-  Top = 190
+object FrmAbertura: TFrmAbertura
+  Left = 392
+  Top = 226
   BorderStyle = bsDialog
-  Caption = '..:: ZFCalc ::..'
+  Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
   ClientHeight = 629
   ClientWidth = 902
   Color = 5848885
@@ -17,6 +17,7 @@ object Form1: TForm1
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object suiForm1: TsuiForm
@@ -30,7 +31,7 @@ object Form1: TForm1
     BorderColor = clBlack
     BorderWidth = 1
     Color = 15198183
-    Caption = '..:: CalcStake - Version 1.0 ::..'
+    Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
     TitleBarButtons = <
       item
         UIStyle = BlueGlass
@@ -10228,7 +10229,7 @@ object Form1: TForm1
     Left = 496
     Top = 120
     Bitmap = {
-      494C01010C000E00040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010C000E00040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000008000000001002000000000000000
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12344,6 +12345,34 @@ object Form1: TForm1
       C0000003F800001F00000000E7FFCF03C0000003F800001F00000000E7FFC103
       C0000003FC00003F00000000E7FFC031C0000003FE00007F00000000E7FFCE79
       E0000007FF0000FF00000000E7FFC7FFFFFFFFFFFF8001FF00000000E7FFC07F
-      FFFFFFFFFFE007FF00000000FFFFE07F}
+      FFFFFFFFFFE007FF00000000FFFFE07F00000000000000000000000000000000
+      000000000000}
+  end
+  object mensagem: TsuiMessageDialog
+    Position = poScreenCenter
+    Caption = 'suiDialog'
+    UIStyle = Protein
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWhite
+    CaptionFont.Height = -11
+    CaptionFont.Name = 'Tahoma'
+    CaptionFont.Style = [fsBold]
+    ButtonCursor = crHandPoint
+    ButtonCount = 1
+    Button1Caption = 'OK'
+    Button2Caption = 'Cancel'
+    Button3Caption = 'Cancel'
+    Button1ModalResult = 1
+    Button2ModalResult = 2
+    Button3ModalResult = 2
+    IconType = suiInformation
+    Text = 'Hello world!'
+    Left = 152
+    Top = 256
   end
 end

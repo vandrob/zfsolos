@@ -1,6 +1,6 @@
-object Form1: TForm1
-  Left = 463
-  Top = 190
+object FrmAbertura: TFrmAbertura
+  Left = 283
+  Top = 146
   BorderStyle = bsDialog
   Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
   ClientHeight = 629
@@ -17,6 +17,7 @@ object Form1: TForm1
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object suiForm1: TsuiForm
@@ -12346,5 +12347,32 @@ object Form1: TForm1
       E0000007FF0000FF00000000E7FFC7FFFFFFFFFFFF8001FF00000000E7FFC07F
       FFFFFFFFFFE007FF00000000FFFFE07F00000000000000000000000000000000
       000000000000}
+  end
+  object mensagem: TsuiMessageDialog
+    Position = poScreenCenter
+    Caption = 'suiDialog'
+    UIStyle = Protein
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWhite
+    CaptionFont.Height = -11
+    CaptionFont.Name = 'Tahoma'
+    CaptionFont.Style = [fsBold]
+    ButtonCursor = crHandPoint
+    ButtonCount = 1
+    Button1Caption = 'OK'
+    Button2Caption = 'Cancel'
+    Button3Caption = 'Cancel'
+    Button1ModalResult = 1
+    Button2ModalResult = 2
+    Button3ModalResult = 2
+    IconType = suiInformation
+    Text = 'Hello world!'
+    Left = 152
+    Top = 256
   end
 end

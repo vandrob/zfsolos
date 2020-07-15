@@ -5,10 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, SUIForm, SUIButton, jpeg, SUIImagePanel, Menus,
-  ActnList, SUIMainMenu, StdCtrls, ImgList;
+  ActnList, SUIMainMenu, StdCtrls, ImgList, SUIDlg;
 
 type
-  TForm1 = class(TForm)
+  TFrmAbertura = class(TForm)
     suiForm1: TsuiForm;
     Image1: TImage;
     suiMainMenu1: TsuiMainMenu;
@@ -33,6 +33,7 @@ type
     ActBackup: TAction;
     Metodos1: TMenuItem;
     ImageList1: TImageList;
+    mensagem: TsuiMessageDialog;
     procedure btnSairClick(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
     procedure ActCalculosExecute(Sender: TObject);
@@ -42,6 +43,7 @@ type
     procedure ActMuralExecute(Sender: TObject);
     procedure ActAtualizacoesExecute(Sender: TObject);
     procedure ActSairExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -49,55 +51,83 @@ type
   end;
 
 var
-  Form1: TForm1;
+  FrmAbertura: TFrmAbertura;
 
 implementation
 
+uses uFuncoes, uFrmUsuarios, uFrmTeste;
+
+
 {$R *.dfm}
 
-procedure TForm1.btnSairClick(Sender: TObject);
+procedure TFrmAbertura.btnSairClick(Sender: TObject);
 begin
  application.terminate;
 end;
 
-procedure TForm1.ActClientesExecute(Sender: TObject);
+procedure TFrmAbertura.ActClientesExecute(Sender: TObject);
 begin
- showmessage('a');
+
+ if myConfirm('apagar o registro?','atenção exclusão',0) then showmessage('apagando...');
+{
+   if not assigned(FrmUsuarios) then
+                 FrmMenu:=TFrmMenu.Create(Application);
+                 FrmMenu.ShowModal;
+                 FreeAndNil(FrmMenu);
+                  close;}
 end;
 
-procedure TForm1.ActCalculosExecute(Sender: TObject);
+procedure TFrmAbertura.ActCalculosExecute(Sender: TObject);
 begin
  showmessage('b');
 end;
 
-procedure TForm1.ActBackupExecute(Sender: TObject);
+procedure TFrmAbertura.ActBackupExecute(Sender: TObject);
 begin
  showmessage('f');
 end;
 
-procedure TForm1.ActMetodosExecute(Sender: TObject);
+procedure TFrmAbertura.ActMetodosExecute(Sender: TObject);
 begin
  showmessage('c');
 end;
 
-procedure TForm1.ActUsuariosExecute(Sender: TObject);
+procedure TFrmAbertura.ActUsuariosExecute(Sender: TObject);
 begin
- showmessage('d');
+
+   if not assigned(FrmUsuarios) then
+                 FrmUsuarios:=TFrmUsuarios.Create(Application);
+                 FrmUsuarios.ShowModal;
+                 FreeAndNil(FrmUsuarios);
+
+
+
+
 end;
 
-procedure TForm1.ActMuralExecute(Sender: TObject);
+procedure TFrmAbertura.ActMuralExecute(Sender: TObject);
 begin
  showmessage('e');
 end;
 
-procedure TForm1.ActAtualizacoesExecute(Sender: TObject);
+procedure TFrmAbertura.ActAtualizacoesExecute(Sender: TObject);
 begin
  showmessage('g');
 end;
 
-procedure TForm1.ActSairExecute(Sender: TObject);
+procedure TFrmAbertura.ActSairExecute(Sender: TObject);
 begin
- application.terminate;
+ close;
+end;
+
+procedure TFrmAbertura.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if myConfirm('Sair da aplicação?') then
+   Action:=caFree
+  else
+   Action:=caNone
+  ;
 end;
 
 end.
