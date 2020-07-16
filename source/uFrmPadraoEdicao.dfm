@@ -14,6 +14,7 @@ object FrmPadraoEdicao: TFrmPadraoEdicao
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   Scaled = False
@@ -191,7 +192,7 @@ object FrmPadraoEdicao: TFrmPadraoEdicao
         ButtonType = suiClose
         Transparent = True
         Top = 6
-        Visible = True
+        Visible = False
         PicNormal.Data = {
           07544269746D6170DA050000424DDA0500000000000036000000280000001300
           0000130000000100200000000000A40500000000000000000000000000000000
@@ -345,7 +346,7 @@ object FrmPadraoEdicao: TFrmPadraoEdicao
         ButtonType = suiMax
         Transparent = True
         Top = 6
-        Visible = True
+        Visible = False
         PicNormal.Data = {
           07544269746D6170DA050000424DDA0500000000000036000000280000001300
           0000130000000100200000000000A40500000000000000000000000000000000
@@ -499,7 +500,7 @@ object FrmPadraoEdicao: TFrmPadraoEdicao
         ButtonType = suiMin
         Transparent = True
         Top = 6
-        Visible = True
+        Visible = False
         PicNormal.Data = {
           07544269746D6170DA050000424DDA0500000000000036000000280000001300
           0000130000000100200000000000A40500000000000000000000000000000000
@@ -1402,6 +1403,7 @@ object FrmPadraoEdicao: TFrmPadraoEdicao
         AutoSize = False
         ParentFont = False
         UIStyle = BlueGlass
+        Cancel = True
         TabOrder = 1
         Transparent = True
         ModalResult = 0

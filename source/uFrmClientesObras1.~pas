@@ -1,0 +1,25 @@
+unit uFrmClientesObras1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uFrmPadrao, SUIButton, SUIDBCtrls, Grids, DBGrids,
+  SUIImagePanel, ExtCtrls, SUIForm;
+
+type
+  TFrmPadrao1 = class(TFrmPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmPadrao1: TFrmPadrao1;
+
+implementation
+
+{$R *.dfm}
+
+end.

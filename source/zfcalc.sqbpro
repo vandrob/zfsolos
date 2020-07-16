@@ -1,20 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/GitDeveloper/zfsolos/source/zfcalc.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1628"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">DROP TABLE zf_clientes;
-CREATE TABLE &quot;zf_clientes&quot; (
-	&quot;id&quot;	INTEGER ,
-	&quot;nome&quot;	VARCHAR(100) NOT NULL,
-	&quot;endereco&quot;	VARCHAR(100),
-	&quot;bairro&quot;	VARCHAR(100),
-	&quot;cidade&quot;	VARCHAR(100),
-	&quot;uf&quot;	CHAR(2),
-	&quot;email&quot;	VARCHAR(100),
-	&quot;contato&quot;	VARCHAR(50),
-	&quot;telefones&quot;	VARCHAR(50),
-	UNIQUE(&quot;nome&quot;),
-	PRIMARY KEY(&quot;id&quot; AUTOINCREMENT)
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/GitDeveloper/zfsolos/source/zfcalc.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3145"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,15:mainsqlite_sequence"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE UNIQUE INDEX &quot;idx_usuarios1&quot; ON &quot;zf_usuarios&quot; (
+	&quot;nome&quot;	ASC
 );
-INSERT INTO zf_clientes (nome) VALUES ('CLIENTE D');
-INSERT INTO zf_clientes (nome) VALUES ('CLIENTE C');
-INSERT INTO zf_clientes (nome) VALUES ('CLIENTE B');
-INSERT INTO zf_clientes (nome) VALUES ('CLIENTE A');
-SELECT * FROM zf_clientes;</sql><sql name="SQL 2">SELECT * from zf_clientes WHERE id&gt;0 ORDER BY nome;
-</sql><current_tab id="1"/></tab_sql></sqlb_project>
+
+CREATE UNIQUE INDEX &quot;idx_clientes1&quot; ON &quot;zf_clientes&quot; (
+	&quot;nome&quot;	ASC
+);
+
+
+CREATE UNIQUE INDEX &quot;idx_obras1&quot; ON &quot;zf_obras&quot; (
+	&quot;nome&quot;	ASC
+);
+
+
+CREATE INDEX &quot;idx_obras2&quot; ON &quot;zf_obras&quot; (
+	&quot;id_cliente&quot; ASC,
+	&quot;id&quot; ASC
+);
+
+
+CREATE INDEX &quot;idx_obras3&quot; ON &quot;zf_obras&quot; (
+	&quot;id&quot; ASC,
+	&quot;id_cliente&quot; ASC
+);
+
+
+CREATE INDEX &quot;idx_obras4&quot; ON &quot;zf_obras&quot; (
+	&quot;id_cliente&quot; ASC,
+	&quot;nome&quot;	ASC
+);
+
+CREATE INDEX &quot;idx_obras5&quot; ON &quot;zf_obras&quot; (
+	&quot;id_usuario&quot;	ASC,
+	&quot;id_cliente&quot;	ASC
+);
+
+CREATE INDEX &quot;idx_obras6&quot; ON &quot;zf_obras&quot; (
+	&quot;id_usuario&quot;	ASC,
+	&quot;nome&quot;	ASC
+);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

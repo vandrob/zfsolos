@@ -1,10 +1,10 @@
 object FrmAbertura: TFrmAbertura
-  Left = 283
-  Top = 146
+  Left = 514
+  Top = 141
   BorderStyle = bsDialog
   Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
-  ClientHeight = 629
-  ClientWidth = 902
+  ClientHeight = 622
+  ClientWidth = 878
   Color = 5848885
   Constraints.MinHeight = 33
   Constraints.MinWidth = 270
@@ -13,19 +13,21 @@ object FrmAbertura: TFrmAbertura
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object suiForm1: TsuiForm
     Left = 0
     Top = 0
-    Width = 902
-    Height = 629
+    Width = 878
+    Height = 622
     TitleBarCustom = False
     UIStyle = BlueGlass
     UIStyleAutoUpdateSub = False
@@ -1259,8 +1261,8 @@ object FrmAbertura: TFrmAbertura
     object Image1: TImage
       Left = 0
       Top = 53
-      Width = 902
-      Height = 576
+      Width = 878
+      Height = 569
       Align = alClient
       AutoSize = True
       Picture.Data = {
@@ -12347,56 +12349,5 @@ object FrmAbertura: TFrmAbertura
       E0000007FF0000FF00000000E7FFC7FFFFFFFFFFFF8001FF00000000E7FFC07F
       FFFFFFFFFFE007FF00000000FFFFE07F00000000000000000000000000000000
       000000000000}
-  end
-  object mensagem: TsuiMessageDialog
-    Position = poScreenCenter
-    Caption = 'suiDialog'
-    UIStyle = Protein
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    CaptionFont.Charset = DEFAULT_CHARSET
-    CaptionFont.Color = clWhite
-    CaptionFont.Height = -11
-    CaptionFont.Name = 'Tahoma'
-    CaptionFont.Style = [fsBold]
-    ButtonCursor = crHandPoint
-    ButtonCount = 1
-    Button1Caption = 'OK'
-    Button2Caption = 'Cancel'
-    Button3Caption = 'Cancel'
-    Button1ModalResult = 1
-    Button2ModalResult = 2
-    Button3ModalResult = 2
-    IconType = suiInformation
-    Text = 'Hello world!'
-    Left = 152
-    Top = 256
-  end
-  object suiPasswordDialog1: TsuiPasswordDialog
-    Position = poScreenCenter
-    Caption = 'Acesso ao Sistema'
-    UIStyle = BlueGlass
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    CaptionFont.Charset = DEFAULT_CHARSET
-    CaptionFont.Color = clWhite
-    CaptionFont.Height = -11
-    CaptionFont.Name = 'Tahoma'
-    CaptionFont.Style = [fsBold]
-    Item1Caption = 'Nome:'
-    Item2Caption = 'Senha:'
-    Item1PasswordChar = #0
-    Item2PasswordChar = '*'
-    ButtonOKCaption = 'OK'
-    ButtonCancelCaption = 'Cancel'
-    ButtonCursor = crHandPoint
-    Left = 288
-    Top = 264
   end
 end

@@ -43,6 +43,7 @@ type
     procedure ActSairExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -76,12 +77,12 @@ end;
 
 procedure TFrmAbertura.ActBackupExecute(Sender: TObject);
 begin
- showmessage('f');
+ myMSG('Em Desenvolvimento...');
 end;
 
 procedure TFrmAbertura.ActMetodosExecute(Sender: TObject);
 begin
- showmessage('c');
+ myMSG('Em Desenvolvimento...');
 end;
 
 procedure TFrmAbertura.ActUsuariosExecute(Sender: TObject);
@@ -99,12 +100,12 @@ end;
 
 procedure TFrmAbertura.ActMuralExecute(Sender: TObject);
 begin
- showmessage('e');
+ myMSG('Em Desenvolvimento...');
 end;
 
 procedure TFrmAbertura.ActAtualizacoesExecute(Sender: TObject);
 begin
- showmessage('g');
+ myMSG('Em Desenvolvimento...');
 end;
 
 procedure TFrmAbertura.ActSairExecute(Sender: TObject);
@@ -116,7 +117,10 @@ procedure TFrmAbertura.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   if myConfirm('Sair da aplicação?') then
-   Action:=caFree
+   begin
+    Action:=caFree;
+    application.terminate;
+   end
   else
    Action:=caNone
   ;
@@ -125,9 +129,16 @@ end;
 procedure TFrmAbertura.FormActivate(Sender: TObject);
 
 begin
+
+
   if not usuario_logado then usuario_logado:=login;
   if usuario_logado=false then application.terminate;
 end;
 
+
+procedure TFrmAbertura.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+ if key=#27 then close;
+end;
 
 end.

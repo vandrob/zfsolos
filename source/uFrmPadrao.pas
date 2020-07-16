@@ -17,7 +17,9 @@ type
     btnIncluir: TsuiButton;
     btnAlterar: TsuiButton;
     btnExcluir: TsuiButton;
+    btnRetornar: TsuiButton;
     procedure suiDBGrid1DblClick(Sender: TObject);
+    procedure btnRetornarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +37,11 @@ uses uDataModule,uFuncoes;
 procedure TFrmPadrao.suiDBGrid1DblClick(Sender: TObject);
 begin
  btnAlterar.click;
+end;
+
+procedure TFrmPadrao.btnRetornarClick(Sender: TObject);
+begin
+ Close;
 end;
 
 end.

@@ -19,7 +19,8 @@ var
   usuario_nome   :string;
   usuario_id     :string;
   usuario_logado :boolean;
-
+  usuario_admin  :string;
+  usuario_ativo  :string;
 implementation
 
 uses uFrmAbertura,udatamodule;
@@ -166,6 +167,8 @@ begin
  usuario_nome:='';
  usuario_id  :='';
  usuario_logado:=false;
+ usuario_admin:='';
+ usuario_ativo:='';
  status:=false;
 
 
@@ -185,9 +188,20 @@ begin
       begin
        usuario_nome  :=nome_digitado;
        usuario_id    :=id_gravado;
-       usuario_logado:=true;
-       status:=true;
-       break;
+       //o usuário está ativo?
+       usuario_ativo:=retornarCampo( 'zf_usuarios', 'ativo_sn', strWhere, 'nome');
+       if (usuario_ativo<>'S') then
+        begin
+           myMsg( 'Acesso NEGADO!'+#13+#10+#13+#10+#13+#10+nome_digitado+' está DESABILITADO(A) no sistema!'+#13+#10+#13+#10+#13+#10+#13+#10+'Solicite acesso ao administrador...','Aviso',2);
+           break;
+        end
+       else
+        begin
+          usuario_admin:=retornarCampo( 'zf_usuarios', 'administrador_sn', strWhere, 'nome');
+          usuario_logado:=true;
+          status:=true;
+          break;
+        end;
       end
      else
       begin
@@ -215,6 +229,8 @@ end;
 initialization
   usuario_nome:='';
   usuario_id  :='';
+  usuario_admin:='';
+  usuario_ativo:='';
   usuario_logado:=false;
 
 end.

@@ -621,13 +621,6 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         Height = 13
         Caption = 'Senha:'
       end
-      object txtOPERACAO: TLabel
-        Left = 24
-        Top = 24
-        Width = 11
-        Height = 13
-        Caption = 'ID'
-      end
       object Label1: TLabel
         Left = 24
         Top = 48
@@ -642,6 +635,21 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         Height = 13
         Caption = 'E-mail:'
       end
+      object txtOPERACAO: TLabel
+        Left = 27
+        Top = 24
+        Width = 16
+        Height = 16
+        Caption = 'ID'
+        Color = clSilver
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
       object chkAdministrador: TsuiCheckBox
         Left = 528
         Top = 79
@@ -655,7 +663,7 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         State = cbUnchecked
         Transparent = False
       end
-      object chkAtivo: TsuiCheckBox
+      object chkBloqueado: TsuiCheckBox
         Left = 384
         Top = 80
         Width = 101
@@ -689,7 +697,7 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         BorderColor = clBlack
         CharCase = ecLowerCase
         TabOrder = 2
-        OnKeyPress = txtNomeKeyPress
+        OnKeyPress = txtEmailKeyPress
       end
       object txtNome: TsuiEdit
         Left = 82

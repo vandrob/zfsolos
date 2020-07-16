@@ -33,8 +33,6 @@ type
     ActBackup: TAction;
     Metodos1: TMenuItem;
     ImageList1: TImageList;
-    mensagem: TsuiMessageDialog;
-    suiPasswordDialog1: TsuiPasswordDialog;
     procedure btnSairClick(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
     procedure ActBackupExecute(Sender: TObject);
@@ -45,6 +43,7 @@ type
     procedure ActSairExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -53,9 +52,6 @@ type
 
 var
   FrmAbertura: TFrmAbertura;
-  usuario_nome:string;
-  usuario_id  :integer;
-  usuario_logado:boolean;
 
 implementation
 
@@ -121,23 +117,28 @@ procedure TFrmAbertura.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   if myConfirm('Sair da aplicação?') then
-   Action:=caFree
+   begin
+    Action:=caFree;
+    application.terminate;
+   end 
   else
    Action:=caNone
   ;
 end;
 
 procedure TFrmAbertura.FormActivate(Sender: TObject);
+
 begin
- if not usuario_logado then
-  begin
-    login;
-  end;
+
+
+  if not usuario_logado then usuario_logado:=login;
+  if usuario_logado=false then application.terminate;
 end;
 
-initialization
-  usuario_nome:='';
-  usuario_id  :=0;
-  usuario_logado:=false;
+
+procedure TFrmAbertura.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+ if key=#27 then close;
+end;
 
 end.

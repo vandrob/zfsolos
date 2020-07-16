@@ -1,9 +1,9 @@
 inherited FrmClientesEdicao: TFrmClientesEdicao
   Left = 596
   Top = 337
-  Caption = 'FrmClientesEdicao'
   ClientHeight = 334
   ClientWidth = 592
+  OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
@@ -615,13 +615,6 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
     inherited suiPanel1: TsuiPanel
       Width = 592
       Height = 216
-      object txtOPERACAO: TLabel
-        Left = 24
-        Top = 24
-        Width = 11
-        Height = 13
-        Caption = 'ID'
-      end
       object Label1: TLabel
         Left = 24
         Top = 48
@@ -651,7 +644,7 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
         Caption = 'Cidade:'
       end
       object Label5: TLabel
-        Left = 520
+        Left = 496
         Top = 96
         Width = 17
         Height = 13
@@ -672,11 +665,26 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
         Caption = 'Contato:'
       end
       object Label8: TLabel
-        Left = 304
+        Left = 312
         Top = 176
-        Width = 50
+        Width = 45
         Height = 13
-        Caption = 'Telefones:'
+        Caption = 'Telefone:'
+      end
+      object txtOPERACAO: TLabel
+        Left = 25
+        Top = 24
+        Width = 16
+        Height = 16
+        Caption = 'ID'
+        Color = clSilver
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
       end
       object txtID: TsuiEdit
         Left = 82
@@ -725,23 +733,12 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
       object txtCidade: TsuiEdit
         Left = 368
         Top = 94
-        Width = 145
+        Width = 121
         Height = 19
         UIStyle = BlueGlass
         BorderColor = clBlack
         CharCase = ecUpperCase
         TabOrder = 3
-        OnKeyPress = txtNomeKeyPress
-      end
-      object txtUF: TsuiEdit
-        Left = 538
-        Top = 94
-        Width = 39
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        TabOrder = 4
         OnKeyPress = txtNomeKeyPress
       end
       object txtEmail: TsuiEdit
@@ -766,7 +763,7 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
         TabOrder = 6
         OnKeyPress = txtNomeKeyPress
       end
-      object txtTelefones: TsuiEdit
+      object txtTelefone: TsuiEdit
         Left = 362
         Top = 174
         Width = 215
@@ -775,7 +772,49 @@ inherited FrmClientesEdicao: TFrmClientesEdicao
         BorderColor = clBlack
         CharCase = ecUpperCase
         TabOrder = 7
-        OnKeyPress = txtNomeKeyPress
+        OnKeyPress = txtTelefoneKeyPress
+      end
+      object txtUF: TsuiComboBox
+        Left = 519
+        Top = 93
+        Width = 57
+        Height = 21
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        ArrowColor = clBlack
+        ButtonColor = 15198183
+        ItemHeight = 13
+        TabOrder = 4
+        OnKeyDown = txtUFKeyDown
+        OnKeyPress = txtUFKeyPress
+        Items.Strings = (
+          'AC'
+          'AL'
+          'AM'
+          'AP'
+          'BA'
+          'CE'
+          'DF'
+          'ES'
+          'GO'
+          'MA'
+          'MG'
+          'MS'
+          'MT'
+          'PA'
+          'PB'
+          'PE'
+          'PI'
+          'PR'
+          'RJ'
+          'RN'
+          'RS'
+          'RO'
+          'RR'
+          'SC'
+          'SE'
+          'SP'
+          'TO')
       end
     end
   end

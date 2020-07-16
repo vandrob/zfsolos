@@ -1,0 +1,27 @@
+unit uFrmConexao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg, acPNG, SUIButton, StdCtrls, Buttons;
+
+type
+  TFrmConexao = class(TForm)
+    Image1: TImage;
+    BtnConectar: TBitBtn;
+    btnSair: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmConexao: TFrmConexao;
+
+implementation
+
+{$R *.dfm}
+
+end.

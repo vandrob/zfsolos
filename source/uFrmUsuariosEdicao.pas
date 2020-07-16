@@ -10,19 +10,20 @@ uses
 type
   TFrmUsuariosEdicao = class(TFrmPadraoEdicao)
     chkAdministrador: TsuiCheckBox;
-    chkAtivo: TsuiCheckBox;
+    chkBloqueado: TsuiCheckBox;
     txtSenha: TsuiEdit;
     Label3: TLabel;
     txtEmail: TsuiEdit;
     txtNome: TsuiEdit;
     txtID: TsuiEdit;
-    txtOPERACAO: TLabel;
     Label1: TLabel;
     Label2: TLabel;
+    txtOPERACAO: TLabel;
     procedure txtNomeKeyPress(Sender: TObject; var Key: Char);
     procedure FormActivate(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure txtEmailKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -53,8 +54,8 @@ begin
  txtNome.Text :='';
  txtEmail.Text:='';
  txtSenha.Text:='';
- chkAtivo.Checked:=true;
- chkAdministrador.Checked:=true;
+ chkBloqueado.Checked:=false;
+ chkAdministrador.Checked:=false;
 
  if (strOperacao<>'I') then
   begin
@@ -62,14 +63,14 @@ begin
    txtNome.Text :=trimright(trimleft( datamodule1.qrylocal_usuariosnome.AsString));
    txtEmail.Text:=trimright(trimleft( datamodule1.qrylocal_usuariosemail.AsString ));
    txtSenha.Text:=trimright(trimleft( datamodule1.qrylocal_usuariossenha.AsString));
-   chkAtivo.Checked:= trimright(trimleft( datamodule1.qrylocal_usuariosativo_sn.AsString))='S';
+   chkBloqueado.Checked:= (trimright(trimleft( datamodule1.qrylocal_usuariosativo_sn.AsString))<>'S');
    chkAdministrador.Checked:=trimright(trimleft( datamodule1.qrylocal_usuariosadministrador_sn.AsString))='S';
   end;
 
    txtNome.Enabled:=strOperacao<>'E';
    txtEmail.Enabled:=strOperacao<>'E';
    txtSenha.Enabled:=strOperacao<>'E';
-   chkAtivo.Enabled:=strOperacao<>'E';
+   chkBloqueado.Enabled:=strOperacao<>'E';
    chkAdministrador.Enabled:=strOperacao<>'E';
 
    if (strOperacao<>'E') then
@@ -85,7 +86,10 @@ begin
      btnExcluir.Visible:=true;
     end
    ;
- 
+
+
+
+
 end;
 
 procedure TFrmUsuariosEdicao.txtNomeKeyPress(Sender: TObject; var Key: Char);
@@ -97,8 +101,25 @@ end;
 procedure TFrmUsuariosEdicao.FormActivate(Sender: TObject);
 begin
   inherited;
+
   if btnSalvar.Visible then
-   txtNome.SetFocus
+   begin
+    //para usuários não administradores ...
+    if (usuario_admin<>'S') then
+     begin
+      chkBloqueado.Visible:=false;
+      chkAdministrador.Visible:=false;
+      txtNome.Enabled:=false;
+      txtEmail.Enabled:=true;
+      txtSenha.Enabled:=true;
+      myMSG('Campos liberados a alterações:'+#13+#10+' SENHA e EMAIL '+#13+#10+#13+#10+'Outras alterações solicite a um usuário administrador');
+      txtSenha.SetFocus;
+     end
+    else
+     begin
+      txtNome.SetFocus;
+     end;
+   end
   else
    btnExcluir.SetFocus
   ;
@@ -127,7 +148,7 @@ begin
   if not campoPreenchido(txtSenha.Text  , 'O Campo [ SENHA ] é de preenchimento obrigatório')  then begin txtSenha.SetFocus; exit; end;
   if not campoPreenchido(txtEmail.Text  , 'O Campo [ E-MAIL ] é de preenchimento obrigatório') then begin txtEmail.SetFocus; exit; end;
 
-  if (chkAtivo.Checked) then strAtivo:='S' else strAtivo:='N';
+  if (chkBloqueado.Checked) then strAtivo:='N' else strAtivo:='S';
   if (chkAdministrador.Checked) then strAdmin:='S' else strAdmin:='N';
 
 
@@ -168,6 +189,13 @@ begin
   uDatamodule.DataModule1.qrylocal_usuarios.Refresh;
   close;
 
+end;
+
+procedure TFrmUsuariosEdicao.txtEmailKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if key=#13 then btnsalvar.setfocus;
 end;
 
 end.

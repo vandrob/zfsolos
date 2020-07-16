@@ -5,12 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uFrmPadraoEdicao, SUIButton, SUIImagePanel, ExtCtrls, SUIForm,
-  StdCtrls, SUIEdit;
+  StdCtrls, SUIEdit, SUIComboBox;
 
 type
   TFrmClientesEdicao = class(TFrmPadraoEdicao)
     txtID: TsuiEdit;
-    txtOPERACAO: TLabel;
     Label1: TLabel;
     txtNome: TsuiEdit;
     txtEndereco: TsuiEdit;
@@ -19,17 +18,23 @@ type
     Label3: TLabel;
     txtCidade: TsuiEdit;
     Label4: TLabel;
-    txtUF: TsuiEdit;
     Label5: TLabel;
     txtEmail: TsuiEdit;
     Label6: TLabel;
     txtContato: TsuiEdit;
     Label7: TLabel;
-    txtTelefones: TsuiEdit;
+    txtTelefone: TsuiEdit;
     Label8: TLabel;
+    txtOPERACAO: TLabel;
+    txtUF: TsuiComboBox;
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure txtNomeKeyPress(Sender: TObject; var Key: Char);
+    procedure FormActivate(Sender: TObject);
+    procedure txtTelefoneKeyPress(Sender: TObject; var Key: Char);
+    procedure txtUFKeyPress(Sender: TObject; var Key: Char);
+    procedure txtUFKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
 
@@ -77,7 +82,7 @@ begin
             aspas( txtUF.text )+','+
             aspas( txtcontato.text )+','+
             aspas( txtEmail.text )+','+
-            aspas( txtTelefones.text )+')';
+            aspas( txtTelefone.text )+')';
 
    end
   else if (strOperacao='A') then
@@ -90,7 +95,7 @@ begin
              '  uf        = '+ aspas( txtUF.Text)+','+
              '  contato   = '+ aspas( txtcontato.Text)+','+
              '  email     = '+ aspas( txtEmail.Text)+','+
-             '  telefones = '+ aspas( txtTelefones.Text)+
+             '  telefone  = '+ aspas( txtTelefone.Text)+
              ' WHERE '+
              '  id='+aspas( txtID.Text );
    end
@@ -131,10 +136,10 @@ begin
  txtEndereco.Text:='';
  txtBairro.Text:='';
  txtCidade.Text:='';
- txtUF.Text:='';
+ txtUF.Text:='SP';
  txtContato.Text:='';
  txtEmail.Text:='';
- txtTelefones.Text:='';
+ txtTelefone.Text:='';
 
  if (strOperacao<>'I') then
   begin
@@ -144,9 +149,9 @@ begin
    txtBairro.Text   :=trimright(trimleft( datamodule1.qrylocal_clientesbairro.AsString));
    txtCidade.Text   :=trimright(trimleft( datamodule1.qrylocal_clientescidade.AsString));
    txtUF.Text       :=trimright(trimleft( datamodule1.qrylocal_clientesuf.AsString));
-   txtContato.Text  :=trimright(trimleft( datamodule1.qrylocal_clientesuf.AsString ));
+   txtContato.Text  :=trimright(trimleft( datamodule1.qrylocal_clientescontato.AsString ));
    txtEmail.Text    :=trimright(trimleft( datamodule1.qrylocal_clientesemail.AsString));
-   txtTelefones.Text:=trimright(trimleft( datamodule1.qrylocal_clientestelefones.AsString));
+   txtTelefone.Text:=trimright(trimleft( datamodule1.qrylocal_clientestelefone.AsString));
   end;
 
    txtNome.Enabled:=strOperacao<>'E';
@@ -156,7 +161,7 @@ begin
    txtUF.Enabled:=strOperacao<>'E';
    txtContato.Enabled:=strOperacao<>'E';
    txtEmail.Enabled:=strOperacao<>'E';
-   txtTelefones.Enabled:=strOperacao<>'E';
+   txtTelefone.Enabled:=strOperacao<>'E';
 
    if (strOperacao<>'E') then
     begin
@@ -177,7 +182,45 @@ procedure TFrmClientesEdicao.txtNomeKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-if key=#13 then selectnext(Sender as Twincontrol,true,true);
+  if key=#13 then selectnext(Sender as Twincontrol,true,true);
+end;
+
+procedure TFrmClientesEdicao.FormActivate(Sender: TObject);
+begin
+  inherited;
+  if btnSalvar.Visible then
+   txtNome.SetFocus
+  else
+   btnExcluir.SetFocus
+  ;
+
+end;
+
+procedure TFrmClientesEdicao.txtTelefoneKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if key=#13 then btnsalvar.setfocus;
+end;
+
+procedure TFrmClientesEdicao.txtUFKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if key=#13 then
+   selectnext(Sender as Twincontrol,true,true)
+  else
+   key:=#0
+  ;
+end;
+
+procedure TFrmClientesEdicao.txtUFKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+   if Key = VK_DELETE then begin
+    Beep;
+    Key:= 0;
+  end;
 end;
 
 end.

@@ -623,6 +623,7 @@ inherited FrmUsuarios: TFrmUsuarios
     inherited suiPanel2: TsuiPanel
       Width = 684
       inherited btnIncluir: TsuiButton
+        Width = 128
         OnClick = btnIncluirClick
       end
       inherited btnAlterar: TsuiButton
@@ -630,6 +631,10 @@ inherited FrmUsuarios: TFrmUsuarios
       end
       inherited btnExcluir: TsuiButton
         OnClick = btnExcluirClick
+      end
+      inherited btnRetornar: TsuiButton
+        Left = 537
+        Width = 128
       end
     end
   end

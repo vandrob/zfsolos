@@ -1,10 +1,10 @@
 object FrmAbertura: TFrmAbertura
-  Left = 283
-  Top = 146
+  Left = 514
+  Top = 141
   BorderStyle = bsDialog
   Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
-  ClientHeight = 629
-  ClientWidth = 902
+  ClientHeight = 622
+  ClientWidth = 878
   Color = 5848885
   Constraints.MinHeight = 33
   Constraints.MinWidth = 270
@@ -13,19 +13,21 @@ object FrmAbertura: TFrmAbertura
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object suiForm1: TsuiForm
     Left = 0
     Top = 0
-    Width = 902
-    Height = 629
+    Width = 878
+    Height = 622
     TitleBarCustom = False
     UIStyle = BlueGlass
     UIStyleAutoUpdateSub = False
@@ -1259,8 +1261,8 @@ object FrmAbertura: TFrmAbertura
     object Image1: TImage
       Left = 0
       Top = 53
-      Width = 902
-      Height = 576
+      Width = 878
+      Height = 569
       Align = alClient
       AutoSize = True
       Picture.Data = {

@@ -19,7 +19,8 @@ var
   usuario_nome   :string;
   usuario_id     :string;
   usuario_logado :boolean;
-
+  usuario_admin  :string;
+  usuario_ativo  :string;
 implementation
 
 uses uFrmAbertura,udatamodule;
@@ -173,7 +174,7 @@ begin
  while tentativas<3  do
   begin
    tentativas:=tentativas+1;
-    myDLGPassword.Caption:='ZFCALC [Acesso ao Sistema]';
+    myDLGPassword.Caption:='ZFCALC [ Login ]';
 
    if myDLGPassword.ShowModal=mrOk then
     begin
@@ -185,13 +186,28 @@ begin
       begin
        usuario_nome  :=nome_digitado;
        usuario_id    :=id_gravado;
-       usuario_logado:=true;
-       status:=true;
-       break;
+       //o usuário está ativo?
+       usuario_ativo:=retornarCampo( 'zf_usuarios', 'ativo_sn', strWhere, 'nome');
+       if (usuario_ativo<>'S') then
+        begin
+           myMsg( 'Acesso NEGADO!'+#13+#10+#13+#10+#13+#10+nome_digitado+' está DESABILITADO(A) no sistema!'+#13+#10+#13+#10+#13+#10+#13+#10+'Solicite acesso ao administrador...','Aviso',2);
+           break;
+        end
+       else
+        begin
+          usuario_admin:=retornarCampo( 'zf_usuarios', 'administrador_sn', strWhere, 'nome');
+          usuario_logado:=true;
+          status:=true;
+          break;
+        end;
       end
      else
       begin
-        myMsg( 'Usuário ou Senha Incorretas '+#13+#10+'(Tentativa '+inttostr(tentativas)+'/3)','Aviso',2);
+        if ( nome_digitado='') or (senha_digitada='')  then
+          myMsg( 'Informe o nome e a senha!'+#13+#10+'(Tentativa '+inttostr(tentativas)+'/3)','Aviso',2)
+         else
+          myMsg( 'Usuário ou Senha Incorretas '+#13+#10+'(Tentativa '+inttostr(tentativas)+'/3)','Aviso',2)
+         ;
       end;
     end
    else
@@ -211,6 +227,8 @@ end;
 initialization
   usuario_nome:='';
   usuario_id  :='';
+  usuario_admin:='';
+  usuario_ativo:='';
   usuario_logado:=false;
 
 end.

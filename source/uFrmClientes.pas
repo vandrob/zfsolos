@@ -9,11 +9,14 @@ uses
 
 type
   TFrmClientes = class(TFrmPadrao)
+    btnObras: TsuiButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btnObrasClick(Sender: TObject);
+    procedure btnRetornarClick(Sender: TObject);
   private
     procedure chamarTelaEdicao(strOpcao: string);
     { Private declarations }
@@ -26,7 +29,7 @@ var
 
 implementation
 
-uses uDatamodule,uFuncoes, uFrmClientesEdicao;
+uses uDatamodule,uFuncoes, uFrmClientesEdicao, uFrmClientesObras;
 
 {$R *.dfm}
 
@@ -64,11 +67,36 @@ end;
 procedure TFrmClientes.chamarTelaEdicao(strOpcao: string);
 begin
  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
+if strOpcao<>'I' then begin
+ if datamodule1.qrylocal_clientes.RecordCount = 0 then
+  begin
+      myMSG( 'Tabela Vazia! ','Opção não disponível',2);
+      exit;
+  end
+end;
+
 if not assigned(FrmClientesEdicao) then
                  FrmClientesEdicao:=TFrmClientesEdicao.Create(Application);
                  uFrmClientesEdicao.FrmClientesEdicao.carregarCampos(strOpcao);
                  FrmClientesEdicao.ShowModal;
                  FreeAndNil(FrmClientesEdicao);
+end;
+
+procedure TFrmClientes.btnObrasClick(Sender: TObject);
+begin
+  inherited;
+  
+if not assigned(FrmClientesObras) then
+                 FrmClientesObras:=TFrmClientesObras.Create(Application);
+                 uFrmClientesObras.FrmClientesObras.abrirObrasCliente( strtoint( datamodule1.qrylocal_clientesid.AsString) );
+                 FrmClientesObras.ShowModal;
+                 FreeAndNil(FrmClientesObras);
+end;
+
+procedure TFrmClientes.btnRetornarClick(Sender: TObject);
+begin
+  inherited;
+  close;
 end;
 
 end.
