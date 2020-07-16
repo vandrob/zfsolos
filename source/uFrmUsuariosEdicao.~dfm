@@ -1,13 +1,14 @@
 inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
-  ClientHeight = 251
-  ClientWidth = 687
+  Caption = 'FrmUsuariosEdicao'
+  ClientHeight = 248
+  ClientWidth = 701
   OldCreateOrder = True
-  Visible = True
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
-    Width = 687
-    Height = 251
+    Width = 701
+    Height = 248
     TitleBarSections = <
       item
         AutoSize = True
@@ -600,20 +601,32 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         CapSec = False
       end>
     inherited suiPanel2: TsuiPanel
-      Top = 163
-      Width = 687
-      inherited btnCancelar: TsuiButton
-        Left = 344
-        TabOrder = 2
+      Top = 160
+      Width = 701
+      inherited btnSalvar: TsuiButton
+        OnClick = btnSalvarClick
       end
       inherited btnExcluir: TsuiButton
-        TabOrder = 1
+        OnClick = btnExcluirClick
       end
     end
     inherited suiPanel1: TsuiPanel
-      Width = 687
-      Height = 133
-      TabOrder = 0
+      Width = 701
+      Height = 130
+      object Label3: TLabel
+        Left = 384
+        Top = 48
+        Width = 34
+        Height = 13
+        Caption = 'Senha:'
+      end
+      object txtOPERACAO: TLabel
+        Left = 24
+        Top = 24
+        Width = 11
+        Height = 13
+        Caption = 'ID'
+      end
       object Label1: TLabel
         Left = 24
         Top = 48
@@ -628,30 +641,31 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         Height = 13
         Caption = 'E-mail:'
       end
-      object Label3: TLabel
-        Left = 384
-        Top = 48
-        Width = 34
-        Height = 13
-        Caption = 'Senha:'
-      end
-      object Label4: TLabel
-        Left = 24
-        Top = 24
-        Width = 11
-        Height = 13
-        Caption = 'ID'
-      end
-      object txtNome: TsuiEdit
-        Left = 82
-        Top = 46
-        Width = 263
+      object chkAdministrador: TsuiCheckBox
+        Left = 528
+        Top = 79
+        Width = 139
         Height = 19
         UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        TabOrder = 0
-        OnKeyPress = txtNomeKeyPress
+        AutoSize = True
+        Checked = False
+        Caption = 'Administrador do Sistema'
+        TabOrder = 4
+        State = cbUnchecked
+        Transparent = False
+      end
+      object chkAtivo: TsuiCheckBox
+        Left = 384
+        Top = 80
+        Width = 101
+        Height = 19
+        UIStyle = BlueGlass
+        AutoSize = True
+        Checked = False
+        Caption = 'Bloquear Acesso'
+        TabOrder = 3
+        State = cbUnchecked
+        Transparent = False
       end
       object txtSenha: TsuiEdit
         Left = 424
@@ -661,6 +675,7 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         UIStyle = BlueGlass
         BorderColor = clBlack
         CharCase = ecUpperCase
+        PasswordChar = '*'
         TabOrder = 1
         OnKeyPress = txtNomeKeyPress
       end
@@ -675,32 +690,15 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         TabOrder = 2
         OnKeyPress = txtNomeKeyPress
       end
-      object chkAtivo: TsuiCheckBox
-        Left = 390
-        Top = 80
-        Width = 101
+      object txtNome: TsuiEdit
+        Left = 82
+        Top = 46
+        Width = 263
         Height = 19
         UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Bloquear Acesso'
-        TabOrder = 3
-        State = cbUnchecked
-        Transparent = False
-        OnKeyPress = txtNomeKeyPress
-      end
-      object chkAdministrador: TsuiCheckBox
-        Left = 528
-        Top = 79
-        Width = 139
-        Height = 19
-        UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Administrador do Sistema'
-        TabOrder = 4
-        State = cbUnchecked
-        Transparent = False
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 0
         OnKeyPress = txtNomeKeyPress
       end
       object txtID: TsuiEdit
@@ -713,7 +711,6 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         CharCase = ecUpperCase
         TabOrder = 5
         Visible = False
-        OnKeyPress = txtNomeKeyPress
       end
     end
   end

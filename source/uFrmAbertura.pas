@@ -33,10 +33,8 @@ type
     ActBackup: TAction;
     Metodos1: TMenuItem;
     ImageList1: TImageList;
-    mensagem: TsuiMessageDialog;
     procedure btnSairClick(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
-    procedure ActCalculosExecute(Sender: TObject);
     procedure ActBackupExecute(Sender: TObject);
     procedure ActMetodosExecute(Sender: TObject);
     procedure ActUsuariosExecute(Sender: TObject);
@@ -44,6 +42,7 @@ type
     procedure ActAtualizacoesExecute(Sender: TObject);
     procedure ActSairExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +54,7 @@ var
 
 implementation
 
-uses uFuncoes, uFrmUsuarios, uFrmTeste;
+uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes;
 
 
 {$R *.dfm}
@@ -68,18 +67,11 @@ end;
 procedure TFrmAbertura.ActClientesExecute(Sender: TObject);
 begin
 
- if myConfirm('apagar o registro?','atenção exclusão',0) then showmessage('apagando...');
-{
-   if not assigned(FrmUsuarios) then
-                 FrmMenu:=TFrmMenu.Create(Application);
-                 FrmMenu.ShowModal;
-                 FreeAndNil(FrmMenu);
-                  close;}
-end;
+   if not assigned(FrmClientes) then
+                 FrmClientes:=TFrmClientes.Create(Application);
+                 FrmClientes.ShowModal;
+                 FreeAndNil(FrmClientes);
 
-procedure TFrmAbertura.ActCalculosExecute(Sender: TObject);
-begin
- showmessage('b');
 end;
 
 procedure TFrmAbertura.ActBackupExecute(Sender: TObject);
@@ -129,5 +121,13 @@ begin
    Action:=caNone
   ;
 end;
+
+procedure TFrmAbertura.FormActivate(Sender: TObject);
+
+begin
+  if not usuario_logado then usuario_logado:=login;
+  if usuario_logado=false then application.terminate;
+end;
+
 
 end.

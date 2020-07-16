@@ -26,7 +26,7 @@ var
 
 implementation
 
-uses uFuncoes, uDataModule, uFrmUsuariosEdicao, uFrmTeste;
+uses uFuncoes, uDataModule, uFrmUsuariosEdicao;
 {$R *.dfm}
 
 procedure TFrmUsuarios.FormCreate(Sender: TObject);
@@ -45,10 +45,10 @@ end;
 procedure TFrmUsuarios.chamarTelaEdicao(strOpcao: string);
 begin
  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
-if not assigned(FrmTeste) then
-                 FrmTeste:=TFrmTeste.Create(Application);
-                 uFrmTeste.FrmTeste.carregarCampos(strOpcao);
-                 FrmTeste.ShowModal;
+if not assigned(FrmUsuariosEdicao) then
+                 FrmUsuariosEdicao:=TFrmUsuariosEdicao.Create(Application);
+                 uFrmUsuariosEdicao.FrmUsuariosEdicao.carregarCampos(strOpcao);
+                 FrmUsuariosEdicao.ShowModal;
                  FreeAndNil(FrmUsuariosEdicao);
 end;
 

@@ -1,6 +1,6 @@
 object FrmAbertura: TFrmAbertura
-  Left = 392
-  Top = 226
+  Left = 283
+  Top = 146
   BorderStyle = bsDialog
   Caption = '..:: ZFCALC - C'#225'lculo de Cargas ::..'
   ClientHeight = 629
@@ -17,6 +17,7 @@ object FrmAbertura: TFrmAbertura
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -10190,7 +10191,6 @@ object FrmAbertura: TFrmAbertura
     object ActCalculos: TAction
       Caption = '&Calculos'
       ImageIndex = 0
-      OnExecute = ActCalculosExecute
     end
     object ActMetodos: TAction
       Caption = 'M&etodos'
@@ -12374,5 +12374,29 @@ object FrmAbertura: TFrmAbertura
     Text = 'Hello world!'
     Left = 152
     Top = 256
+  end
+  object suiPasswordDialog1: TsuiPasswordDialog
+    Position = poScreenCenter
+    Caption = 'Acesso ao Sistema'
+    UIStyle = BlueGlass
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWhite
+    CaptionFont.Height = -11
+    CaptionFont.Name = 'Tahoma'
+    CaptionFont.Style = [fsBold]
+    Item1Caption = 'Nome:'
+    Item2Caption = 'Senha:'
+    Item1PasswordChar = #0
+    Item2PasswordChar = '*'
+    ButtonOKCaption = 'OK'
+    ButtonCancelCaption = 'Cancel'
+    ButtonCursor = crHandPoint
+    Left = 288
+    Top = 264
   end
 end

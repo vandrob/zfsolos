@@ -9,18 +9,20 @@ uses
 
 type
   TFrmUsuariosEdicao = class(TFrmPadraoEdicao)
+    chkAdministrador: TsuiCheckBox;
+    chkAtivo: TsuiCheckBox;
+    txtSenha: TsuiEdit;
+    Label3: TLabel;
+    txtEmail: TsuiEdit;
+    txtNome: TsuiEdit;
+    txtID: TsuiEdit;
+    txtOPERACAO: TLabel;
     Label1: TLabel;
     Label2: TLabel;
-    Label3: TLabel;
-    txtNome: TsuiEdit;
-    txtSenha: TsuiEdit;
-    txtEmail: TsuiEdit;
-    chkAtivo: TsuiCheckBox;
-    chkAdministrador: TsuiCheckBox;
-    txtID: TsuiEdit;
-    Label4: TLabel;
     procedure txtNomeKeyPress(Sender: TObject; var Key: Char);
-
+    procedure FormActivate(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,16 +35,18 @@ var
 
 implementation
 
-uses uDatamodule,uFuncoes, uFrmTeste;
+uses uDatamodule,uFuncoes;
 {$R *.dfm}
+
+{ TFrmTeste }
 
 procedure TFrmUsuariosEdicao.carregarCampos(strOperacao: string);
 begin
 
-                                      {
- if (strOperacao='I') then caption:='INCLUIR REGISTRO';
- if (strOperacao='A') then caption:='ALTERAR REGISTRO';
- if (strOperacao='E') then caption:='EXCLUIR REGISTRO';
+                                      
+ if (strOperacao='I') then txtOPERACAO.caption:='INCLUIR REGISTRO';
+ if (strOperacao='A') then txtOPERACAO.caption:='ALTERAR REGISTRO';
+ if (strOperacao='E') then txtOPERACAO.caption:='EXCLUIR REGISTRO';
 
 
  txtID.Text   :='0';
@@ -70,7 +74,6 @@ begin
 
    if (strOperacao<>'E') then
     begin
-     txtNome.SetFocus;
      btnSalvar.Visible:=true;
      btnCancelar.Visible:=true;
      btnExcluir.Visible:=false;
@@ -82,15 +85,89 @@ begin
      btnExcluir.Visible:=true;
     end
    ;
-                                       }
+ 
+end;
+
+procedure TFrmUsuariosEdicao.txtNomeKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+ if key=#13 then selectnext(Sender as Twincontrol,true,true);
+end;
+
+procedure TFrmUsuariosEdicao.FormActivate(Sender: TObject);
+begin
+  inherited;
+  if btnSalvar.Visible then
+   txtNome.SetFocus
+  else
+   btnExcluir.SetFocus
+  ;
 
 end;
 
-procedure TFrmUsuariosEdicao.txtNomeKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TFrmUsuariosEdicao.btnExcluirClick(Sender: TObject);
+var
+ strSQL:string;
 begin
   inherited;
-  if key=#13 then selectnext(Sender as Twincontrol,true,true);
+  strSQL:='DELETE FROM zf_usuarios WHERE id='+trimright(trimleft(txtID.Text));
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.qrylocal_usuarios.Refresh;
+  close;
+end;
+
+procedure TFrmUsuariosEdicao.btnSalvarClick(Sender: TObject);
+var
+ strSQL,strAtivo,strAdmin,strOperacao:string;
+begin
+
+  inherited;
+
+  if not campoPreenchido(txtNome.Text   , 'O Campo [ NOME ] é de preenchimento obrigatório')   then begin txtNome.SetFocus; exit; end;
+  if not campoPreenchido(txtSenha.Text  , 'O Campo [ SENHA ] é de preenchimento obrigatório')  then begin txtSenha.SetFocus; exit; end;
+  if not campoPreenchido(txtEmail.Text  , 'O Campo [ E-MAIL ] é de preenchimento obrigatório') then begin txtEmail.SetFocus; exit; end;
+
+  if (chkAtivo.Checked) then strAtivo:='S' else strAtivo:='N';
+  if (chkAdministrador.Checked) then strAdmin:='S' else strAdmin:='N';
+
+
+  strOperacao:= copy(txtOPERACAO.caption,0,1);
+
+  if (strOperacao='I') then
+   begin
+    strSQL:='INSERT INTO zf_usuarios ('+
+            ' nome ,    '+
+            ' senha,    '+
+            ' email,    '+
+            ' ativo_sn, '+
+            ' administrador_sn '+
+            ' ) VALUES ( '+
+            aspas( txtNome.Text )+','+
+            aspas( txtSenha.Text ) +','+
+            aspas( txtEmail.Text ) +','+
+            aspas( strAtivo )+','+
+            aspas( strAdmin )+')';
+            
+   end
+  else if (strOperacao='A') then
+   begin
+     strSQL:='UPDATE zf_usuarios SET '+
+             '  nome = '+ aspas( txtNome.text )+','+
+             '  senha= '+ aspas( txtSenha.Text)+','+
+             '  email= '+ aspas( txtEmail.Text)+','+
+             '  ativo_sn='+aspas( strAtivo )+','+
+             '  administrador_sn='+aspas( strAdmin )+
+             ' WHERE '+
+             '  id='+aspas( txtID.Text );
+   end
+  ;
+
+
+
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.qrylocal_usuarios.Refresh;
+  close;
+
 end;
 
 end.

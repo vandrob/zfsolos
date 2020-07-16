@@ -21,10 +21,9 @@ object DataModule1: TDataModule1
   end
   object qrylocal_usuarios: TZQuery
     Connection = connLocal
-    Active = True
     ReadOnly = True
     SQL.Strings = (
-      'SELECT * from zf_usuarios')
+      'SELECT * from zf_usuarios WHERE id>0 ORDER BY nome;')
     Params = <>
     Left = 48
     Top = 88
@@ -82,5 +81,77 @@ object DataModule1: TDataModule1
     Delimiter = ';'
     Left = 120
     Top = 24
+  end
+  object qrylocal_clientes: TZQuery
+    Connection = connLocal
+    SQL.Strings = (
+      'SELECT * from zf_clientes WHERE id>0 ORDER BY nome;')
+    Params = <>
+    Left = 48
+    Top = 152
+    object qrylocal_clientesid: TIntegerField
+      FieldName = 'id'
+      Visible = False
+    end
+    object qrylocal_clientesnome: TStringField
+      DisplayLabel = 'Nome'
+      DisplayWidth = 50
+      FieldName = 'nome'
+      Required = True
+      Size = 400
+    end
+    object qrylocal_clientesendereco: TStringField
+      DisplayLabel = 'Endere'#231'o'
+      DisplayWidth = 50
+      FieldName = 'endereco'
+      Size = 400
+    end
+    object qrylocal_clientesbairro: TStringField
+      DisplayLabel = 'Bairro'
+      DisplayWidth = 20
+      FieldName = 'bairro'
+      Size = 400
+    end
+    object qrylocal_clientescidade: TStringField
+      DisplayLabel = 'Cidade'
+      DisplayWidth = 50
+      FieldName = 'cidade'
+      Size = 400
+    end
+    object qrylocal_clientesuf: TStringField
+      DisplayLabel = 'UF'
+      DisplayWidth = 5
+      FieldName = 'uf'
+      Size = 8
+    end
+    object qrylocal_clientesemail: TStringField
+      DisplayLabel = 'E-mail'
+      DisplayWidth = 60
+      FieldName = 'email'
+      Size = 400
+    end
+    object qrylocal_clientescontato: TStringField
+      DisplayLabel = 'Contato'
+      DisplayWidth = 30
+      FieldName = 'contato'
+      Size = 200
+    end
+    object qrylocal_clientestelefones: TStringField
+      DisplayLabel = 'Telefones'
+      DisplayWidth = 20
+      FieldName = 'telefones'
+      Size = 200
+    end
+  end
+  object dslocal_clientes: TDataSource
+    DataSet = qrylocal_clientes
+    Left = 160
+    Top = 152
+  end
+  object qryLocal_Retorno: TZQuery
+    Connection = connLocal
+    Params = <>
+    Left = 48
+    Top = 216
   end
 end

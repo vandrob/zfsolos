@@ -1,14 +1,14 @@
-inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
-  Caption = 'FrmUsuariosEdicao'
-  ClientHeight = 248
-  ClientWidth = 701
-  OldCreateOrder = True
-  OnActivate = FormActivate
+inherited FrmClientesEdicao: TFrmClientesEdicao
+  Left = 596
+  Top = 337
+  Caption = 'FrmClientesEdicao'
+  ClientHeight = 334
+  ClientWidth = 592
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
-    Width = 701
-    Height = 248
+    Width = 592
+    Height = 334
     TitleBarSections = <
       item
         AutoSize = True
@@ -601,8 +601,8 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         CapSec = False
       end>
     inherited suiPanel2: TsuiPanel
-      Top = 160
-      Width = 701
+      Top = 246
+      Width = 592
       inherited btnSalvar: TsuiButton
         OnClick = btnSalvarClick
       end
@@ -612,15 +612,8 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
       end
     end
     inherited suiPanel1: TsuiPanel
-      Width = 701
-      Height = 130
-      object Label3: TLabel
-        Left = 384
-        Top = 48
-        Width = 34
-        Height = 13
-        Caption = 'Senha:'
-      end
+      Width = 592
+      Height = 216
       object txtOPERACAO: TLabel
         Left = 24
         Top = 24
@@ -637,70 +630,52 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
       end
       object Label2: TLabel
         Left = 24
-        Top = 80
-        Width = 31
+        Top = 72
+        Width = 49
         Height = 13
-        Caption = 'E-mail:'
+        Caption = 'Endere'#231'o:'
       end
-      object chkAdministrador: TsuiCheckBox
-        Left = 528
-        Top = 79
-        Width = 139
-        Height = 19
-        UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Administrador do Sistema'
-        TabOrder = 4
-        State = cbUnchecked
-        Transparent = False
+      object Label3: TLabel
+        Left = 24
+        Top = 96
+        Width = 30
+        Height = 13
+        Caption = 'Bairro:'
       end
-      object chkAtivo: TsuiCheckBox
-        Left = 384
-        Top = 80
-        Width = 101
-        Height = 19
-        UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Bloquear Acesso'
-        TabOrder = 3
-        State = cbUnchecked
-        Transparent = False
+      object Label4: TLabel
+        Left = 320
+        Top = 96
+        Width = 36
+        Height = 13
+        Caption = 'Cidade:'
       end
-      object txtSenha: TsuiEdit
-        Left = 424
-        Top = 48
-        Width = 121
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        PasswordChar = '*'
-        TabOrder = 1
-        OnKeyPress = txtNomeKeyPress
+      object Label5: TLabel
+        Left = 520
+        Top = 96
+        Width = 17
+        Height = 13
+        Caption = 'UF:'
       end
-      object txtEmail: TsuiEdit
-        Left = 80
-        Top = 80
-        Width = 265
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecLowerCase
-        TabOrder = 2
-        OnKeyPress = txtNomeKeyPress
+      object Label6: TLabel
+        Left = 24
+        Top = 136
+        Width = 32
+        Height = 13
+        Caption = 'E-Mail:'
       end
-      object txtNome: TsuiEdit
-        Left = 82
-        Top = 46
-        Width = 263
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        TabOrder = 0
-        OnKeyPress = txtNomeKeyPress
+      object Label7: TLabel
+        Left = 24
+        Top = 176
+        Width = 40
+        Height = 13
+        Caption = 'Contato:'
+      end
+      object Label8: TLabel
+        Left = 304
+        Top = 176
+        Width = 50
+        Height = 13
+        Caption = 'Telefones:'
       end
       object txtID: TsuiEdit
         Left = 82
@@ -710,8 +685,96 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         UIStyle = BlueGlass
         BorderColor = clBlack
         CharCase = ecUpperCase
-        TabOrder = 5
+        TabOrder = 8
         Visible = False
+      end
+      object txtNome: TsuiEdit
+        Left = 82
+        Top = 46
+        Width = 495
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 0
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtEndereco: TsuiEdit
+        Left = 82
+        Top = 70
+        Width = 495
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 1
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtBairro: TsuiEdit
+        Left = 82
+        Top = 94
+        Width = 215
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 2
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtCidade: TsuiEdit
+        Left = 368
+        Top = 94
+        Width = 145
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 3
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtUF: TsuiEdit
+        Left = 538
+        Top = 94
+        Width = 39
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 4
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtEmail: TsuiEdit
+        Left = 82
+        Top = 134
+        Width = 215
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecLowerCase
+        TabOrder = 5
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtContato: TsuiEdit
+        Left = 82
+        Top = 174
+        Width = 215
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 6
+        OnKeyPress = txtNomeKeyPress
+      end
+      object txtTelefones: TsuiEdit
+        Left = 362
+        Top = 174
+        Width = 215
+        Height = 19
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        CharCase = ecUpperCase
+        TabOrder = 7
+        OnKeyPress = txtNomeKeyPress
       end
     end
   end

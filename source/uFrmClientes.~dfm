@@ -1,14 +1,10 @@
-inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
-  Caption = 'FrmUsuariosEdicao'
-  ClientHeight = 248
-  ClientWidth = 701
-  OldCreateOrder = True
-  OnActivate = FormActivate
+inherited FrmClientes: TFrmClientes
+  Caption = 'FrmClientes'
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  inherited suiForm1: TsuiForm
-    Width = 701
-    Height = 248
+  inherited FrmPadrao: TsuiForm
     TitleBarSections = <
       item
         AutoSize = True
@@ -600,118 +596,24 @@ inherited FrmUsuariosEdicao: TFrmUsuariosEdicao
         Stretch = True
         CapSec = False
       end>
-    inherited suiPanel2: TsuiPanel
-      Top = 160
-      Width = 701
-      inherited btnSalvar: TsuiButton
-        OnClick = btnSalvarClick
+    inherited suiPanel1: TsuiPanel
+      inherited suiDBGrid1: TsuiDBGrid
+        DataSource = DataModule1.dslocal_clientes
       end
-      inherited btnExcluir: TsuiButton
-        Left = 192
-        OnClick = btnExcluirClick
+      inherited suiDBNavigator1: TsuiDBNavigator
+        DataSource = DataModule1.dslocal_clientes
+        Hints.Strings = ()
       end
     end
-    inherited suiPanel1: TsuiPanel
-      Width = 701
-      Height = 130
-      object Label3: TLabel
-        Left = 384
-        Top = 48
-        Width = 34
-        Height = 13
-        Caption = 'Senha:'
+    inherited suiPanel2: TsuiPanel
+      inherited btnIncluir: TsuiButton
+        OnClick = btnIncluirClick
       end
-      object txtOPERACAO: TLabel
-        Left = 24
-        Top = 24
-        Width = 11
-        Height = 13
-        Caption = 'ID'
+      inherited btnAlterar: TsuiButton
+        OnClick = btnAlterarClick
       end
-      object Label1: TLabel
-        Left = 24
-        Top = 48
-        Width = 31
-        Height = 13
-        Caption = 'Nome:'
-      end
-      object Label2: TLabel
-        Left = 24
-        Top = 80
-        Width = 31
-        Height = 13
-        Caption = 'E-mail:'
-      end
-      object chkAdministrador: TsuiCheckBox
-        Left = 528
-        Top = 79
-        Width = 139
-        Height = 19
-        UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Administrador do Sistema'
-        TabOrder = 4
-        State = cbUnchecked
-        Transparent = False
-      end
-      object chkAtivo: TsuiCheckBox
-        Left = 384
-        Top = 80
-        Width = 101
-        Height = 19
-        UIStyle = BlueGlass
-        AutoSize = True
-        Checked = False
-        Caption = 'Bloquear Acesso'
-        TabOrder = 3
-        State = cbUnchecked
-        Transparent = False
-      end
-      object txtSenha: TsuiEdit
-        Left = 424
-        Top = 48
-        Width = 121
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        PasswordChar = '*'
-        TabOrder = 1
-        OnKeyPress = txtNomeKeyPress
-      end
-      object txtEmail: TsuiEdit
-        Left = 80
-        Top = 80
-        Width = 265
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecLowerCase
-        TabOrder = 2
-        OnKeyPress = txtNomeKeyPress
-      end
-      object txtNome: TsuiEdit
-        Left = 82
-        Top = 46
-        Width = 263
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        TabOrder = 0
-        OnKeyPress = txtNomeKeyPress
-      end
-      object txtID: TsuiEdit
-        Left = 82
-        Top = 22
-        Width = 55
-        Height = 19
-        UIStyle = BlueGlass
-        BorderColor = clBlack
-        CharCase = ecUpperCase
-        TabOrder = 5
-        Visible = False
+      inherited btnExcluir: TsuiButton
+        OnClick = btnExcluirClick
       end
     end
   end

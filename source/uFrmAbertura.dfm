@@ -17,6 +17,7 @@ object FrmAbertura: TFrmAbertura
   Position = poScreenCenter
   Scaled = False
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -10190,7 +10191,6 @@ object FrmAbertura: TFrmAbertura
     object ActCalculos: TAction
       Caption = '&Calculos'
       ImageIndex = 0
-      OnExecute = ActCalculosExecute
     end
     object ActMetodos: TAction
       Caption = 'M&etodos'
@@ -12347,32 +12347,5 @@ object FrmAbertura: TFrmAbertura
       E0000007FF0000FF00000000E7FFC7FFFFFFFFFFFF8001FF00000000E7FFC07F
       FFFFFFFFFFE007FF00000000FFFFE07F00000000000000000000000000000000
       000000000000}
-  end
-  object mensagem: TsuiMessageDialog
-    Position = poScreenCenter
-    Caption = 'suiDialog'
-    UIStyle = Protein
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    CaptionFont.Charset = DEFAULT_CHARSET
-    CaptionFont.Color = clWhite
-    CaptionFont.Height = -11
-    CaptionFont.Name = 'Tahoma'
-    CaptionFont.Style = [fsBold]
-    ButtonCursor = crHandPoint
-    ButtonCount = 1
-    Button1Caption = 'OK'
-    Button2Caption = 'Cancel'
-    Button3Caption = 'Cancel'
-    Button1ModalResult = 1
-    Button2ModalResult = 2
-    Button3ModalResult = 2
-    IconType = suiInformation
-    Text = 'Hello world!'
-    Left = 152
-    Top = 256
   end
 end

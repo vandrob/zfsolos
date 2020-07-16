@@ -45,11 +45,11 @@ end;
 procedure TFrmUsuarios.chamarTelaEdicao(strOpcao: string);
 begin
  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
-if not assigned(FrmUsuariosEdicao) then
-                 FrmUsuariosEdicao:=TFrmUsuariosEdicao.Create(Application);
-                 uFrmUsuariosEdicao.FrmUsuariosEdicao.carregarCampos(strOpcao);
-                 FrmUsuariosEdicao.ShowModal;
-                 FreeAndNil(FrmUsuariosEdicao);}
+if not assigned(FrmTeste) then
+                 FrmTeste:=TFrmTeste.Create(Application);
+                 uFrmTeste.FrmTeste.carregarCampos(strOpcao);
+                 FrmTeste.ShowModal;
+                 FreeAndNil(FrmUsuariosEdicao);
 end;
 
 procedure TFrmUsuarios.btnIncluirClick(Sender: TObject);
@@ -67,7 +67,7 @@ end;
 procedure TFrmUsuarios.btnExcluirClick(Sender: TObject);
 begin
   inherited;
-  chamarTelaEdicao('I');
+  chamarTelaEdicao('E');
 end;
 
 end.
