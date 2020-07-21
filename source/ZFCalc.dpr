@@ -13,7 +13,11 @@ uses
   uFrmClientesEdicao in 'uFrmClientesEdicao.pas' {FrmClientesEdicao},
   uFrmClientesObrasEdicao in 'uFrmClientesObrasEdicao.pas' {FrmClientesObrasEdicao},
   uFrmClientesObras in 'uFrmClientesObras.pas' {FrmClientesObras},
-  uFrmConexao in 'uFrmConexao.pas' {FrmConexao};
+  uFrmConexao in 'uFrmConexao.pas' {FrmConexao},
+  uFrmEstacas_Tipos in 'uFrmEstacas_Tipos.pas' {FrmEstacas_Tipos},
+  uFrmEstacas_TiposEdicao in 'uFrmEstacas_TiposEdicao.pas' {FrmEstacas_TiposEdicao},
+  uFrmSolos in 'uFrmSolos.pas' {FrmSolos},
+  uFrmSolosEdicao in 'uFrmSolosEdicao.pas' {FrmSolosEdicao};
 
 {$R *.res}
 

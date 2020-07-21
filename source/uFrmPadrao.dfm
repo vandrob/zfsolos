@@ -1813,4 +1813,10 @@ object FrmPadrao: TFrmPadrao
       end
     end
   end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 15000
+    Left = 624
+    Top = 150
+  end
 end

@@ -18,6 +18,7 @@ type
     btnAlterar: TsuiButton;
     btnExcluir: TsuiButton;
     btnRetornar: TsuiButton;
+    Timer1: TTimer;
     procedure suiDBGrid1DblClick(Sender: TObject);
     procedure btnRetornarClick(Sender: TObject);
   private

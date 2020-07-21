@@ -1,9 +1,9 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 475
+  Left = 677
   Top = 258
-  Height = 436
-  Width = 301
+  Height = 587
+  Width = 401
   object connSQLITE: TZConnection
     ControlsCodePage = cCP_UTF8
     UTF8StringsAsWideField = False
@@ -19,7 +19,7 @@ object DataModule1: TDataModule1
     Top = 128
   end
   object qrylocal_usuarios: TZQuery
-    Connection = connLocal
+    Connection = connMYSQL
     ReadOnly = True
     SQL.Strings = (
       'SELECT * from zf_usuarios WHERE id>0 ORDER BY nome;')
@@ -76,13 +76,13 @@ object DataModule1: TDataModule1
   end
   object cmdLocal: TZSQLProcessor
     Params = <>
-    Connection = connLocal
+    Connection = connMYSQL
     Delimiter = ';'
     Left = 48
     Top = 328
   end
   object qrylocal_clientes: TZQuery
-    Connection = connLocal
+    Connection = connMYSQL
     SQL.Strings = (
       'SELECT * from zf_clientes WHERE id>0 ORDER BY nome;')
     Params = <>
@@ -158,13 +158,13 @@ object DataModule1: TDataModule1
     Top = 152
   end
   object qryLocal_Retorno: TZQuery
-    Connection = connLocal
+    Connection = connMYSQL
     Params = <>
     Left = 48
     Top = 216
   end
   object qryLocal_Obras: TZQuery
-    Connection = connLocal
+    Connection = connMYSQL
     ReadOnly = True
     SQL.Strings = (
       
@@ -253,34 +253,68 @@ object DataModule1: TDataModule1
     Left = 160
     Top = 264
   end
-  object connLocal: TZConnection
-    ControlsCodePage = cCP_UTF8
-    UTF8StringsAsWideField = False
-    AutoEncodeStrings = False
-    Properties.Strings = (
-      'controls_cp=CP_UTF8')
-    HostName = '188.93.231.39'
-    Port = 3306
-    Database = 'estaqnet_erp1'
-    User = 'estaqnet'
-    Password = 'vander126422'
-    Protocol = 'mysql-5'
-    Left = 40
-    Top = 32
-  end
   object connMYSQL: TZConnection
-    ControlsCodePage = cCP_UTF8
+    ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
     Properties.Strings = (
-      'controls_cp=CP_UTF8')
+      'controls_cp=GET_ACP')
+    Connected = True
     HostName = '188.93.231.39'
     Port = 3306
     Database = 'estaqnet_erp1'
     User = 'estaqnet'
     Password = 'vander126422'
     Protocol = 'mysql-5'
-    Left = 208
-    Top = 72
+    Left = 48
+    Top = 24
+  end
+  object qryLocal_Estacas_Tipos: TZQuery
+    Connection = connMYSQL
+    SQL.Strings = (
+      'SELECT * FROM zf_estacas_tipos')
+    Params = <>
+    Left = 56
+    Top = 392
+    object qryLocal_Estacas_Tiposid: TIntegerField
+      FieldName = 'id'
+      Required = True
+      Visible = False
+    end
+    object qryLocal_Estacas_Tiposnome: TStringField
+      DisplayLabel = 'Tipo de Estaca'
+      DisplayWidth = 100
+      FieldName = 'nome'
+      Required = True
+      Size = 180
+    end
+  end
+  object dsLocal_Estacas_Tipos: TDataSource
+    DataSet = qryLocal_Estacas_Tipos
+    Left = 200
+    Top = 392
+  end
+  object qryLocal_Solos: TZQuery
+    Connection = connMYSQL
+    ReadOnly = True
+    SQL.Strings = (
+      'SELECT * FROM zf_solos ORDER BY nome;')
+    Params = <>
+    Left = 56
+    Top = 472
+    object qryLocal_Solosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qryLocal_Solosnome: TStringField
+      DisplayLabel = 'Nome do Tipo de Solo'
+      FieldName = 'nome'
+      Size = 45
+    end
+  end
+  object dsLocal_Solos: TDataSource
+    DataSet = qryLocal_Solos
+    Left = 200
+    Top = 472
   end
 end

@@ -15,6 +15,7 @@ object FrmConexao: TFrmConexao
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
@@ -33839,6 +33840,36 @@ object FrmConexao: TFrmConexao
       0000}
     Stretch = True
     Transparent = True
+  end
+  object lblVersao: TLabel
+    Left = 546
+    Top = 301
+    Width = 37
+    Height = 17
+    Caption = '0.0.0'
+    Color = 10485760
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Arial Rounded MT Bold'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 394
+    Top = 304
+    Width = 141
+    Height = 12
+    Caption = 'VERS'#195'O DO APLICATIVO:'
+    Color = 10485760
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -11
+    Font.Name = 'Arial Rounded MT Bold'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
   end
   object BtnConectar: TBitBtn
     Left = 80

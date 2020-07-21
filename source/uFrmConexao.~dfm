@@ -33841,12 +33841,13 @@ object FrmConexao: TFrmConexao
     Transparent = True
   end
   object BtnConectar: TBitBtn
-    Left = 392
-    Top = 304
-    Width = 241
+    Left = 80
+    Top = 328
+    Width = 281
     Height = 41
     Caption = 'Conectar-se a Base de dados na Nuvem'
     TabOrder = 0
+    OnClick = BtnConectarClick
     Glyph.Data = {
       360C0000424D360C000000000000360000002800000020000000200000000100
       180000000000000C0000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -33948,12 +33949,13 @@ object FrmConexao: TFrmConexao
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
   end
   object btnSair: TBitBtn
-    Left = 392
-    Top = 352
-    Width = 241
+    Left = 384
+    Top = 328
+    Width = 257
     Height = 41
     Caption = '&Sair'
     TabOrder = 1
+    OnClick = btnSairClick
     Glyph.Data = {
       360C0000424D360C000000000000360000002800000020000000200000000100
       180000000000000C0000C40E0000C40E00000000000000000000FFFFFFFFFFFF

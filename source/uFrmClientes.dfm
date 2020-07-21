@@ -2,6 +2,7 @@ inherited FrmClientes: TFrmClientes
   ClientHeight = 441
   ClientWidth = 787
   OldCreateOrder = True
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -755,5 +756,8 @@ inherited FrmClientes: TFrmClientes
         TabOrder = 4
       end
     end
+  end
+  inherited Timer1: TTimer
+    OnTimer = Timer1Timer
   end
 end

@@ -1691,7 +1691,7 @@ object FrmPadrao: TFrmPadrao
         Left = 657
         Top = 22
         Width = 161
-        Height = 64
+        Height = 57
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -1701,6 +1701,7 @@ object FrmPadrao: TFrmPadrao
         AutoSize = False
         ParentFont = False
         UIStyle = BlueGlass
+        Cancel = True
         TabOrder = 3
         Transparent = True
         ModalResult = 0
@@ -1811,5 +1812,11 @@ object FrmPadrao: TFrmPadrao
         ResHandle = 0
       end
     end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 10000
+    Left = 640
+    Top = 150
   end
 end

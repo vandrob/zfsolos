@@ -17,6 +17,8 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnObrasClick(Sender: TObject);
     procedure btnRetornarClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     procedure chamarTelaEdicao(strOpcao: string);
     { Private declarations }
@@ -43,6 +45,7 @@ procedure TFrmClientes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+    timer1.Enabled:=false;
     Datamodule1.qrylocal_clientes.Close;
 end;
 
@@ -66,7 +69,7 @@ end;
 
 procedure TFrmClientes.chamarTelaEdicao(strOpcao: string);
 begin
- //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
+  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
 if strOpcao<>'I' then begin
  if datamodule1.qrylocal_clientes.RecordCount = 0 then
   begin
@@ -75,11 +78,14 @@ if strOpcao<>'I' then begin
   end
 end;
 
+timer1.Enabled:=false;
 if not assigned(FrmClientesEdicao) then
                  FrmClientesEdicao:=TFrmClientesEdicao.Create(Application);
                  uFrmClientesEdicao.FrmClientesEdicao.carregarCampos(strOpcao);
                  FrmClientesEdicao.ShowModal;
                  FreeAndNil(FrmClientesEdicao);
+timer1.Enabled:=true;
+                 
 end;
 
 procedure TFrmClientes.btnObrasClick(Sender: TObject);
@@ -97,6 +103,24 @@ procedure TFrmClientes.btnRetornarClick(Sender: TObject);
 begin
   inherited;
   close;
+end;
+
+procedure TFrmClientes.Timer1Timer(Sender: TObject);
+begin
+  inherited;
+  //refresh na tabela
+  with Datamodule1.qrylocal_clientes do begin
+   disablecontrols;
+   Refresh;
+   enablecontrols;
+  end;
+
+end;
+
+procedure TFrmClientes.FormActivate(Sender: TObject);
+begin
+  inherited;
+   timer1.Enabled:=true;
 end;
 
 end.

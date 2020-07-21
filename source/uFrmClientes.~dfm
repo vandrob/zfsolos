@@ -1,10 +1,15 @@
 inherited FrmClientes: TFrmClientes
+  ClientHeight = 441
+  ClientWidth = 787
   OldCreateOrder = True
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited FrmPadrao: TsuiForm
+    Width = 787
+    Height = 441
     TitleBarSections = <
       item
         AutoSize = True
@@ -597,17 +602,23 @@ inherited FrmClientes: TFrmClientes
         CapSec = False
       end>
     inherited suiPanel1: TsuiPanel
-      Height = 420
+      Width = 787
+      Height = 323
       Caption = 'Cadastro de Clientes'
       inherited suiDBGrid1: TsuiDBGrid
+        Width = 779
+        Height = 237
         DataSource = DataModule1.dslocal_clientes
       end
       inherited suiDBNavigator1: TsuiDBNavigator
+        Top = 262
+        Width = 779
         DataSource = DataModule1.dslocal_clientes
         Hints.Strings = ()
       end
     end
     inherited suiPanel2: TsuiPanel
+      Width = 787
       inherited btnIncluir: TsuiButton
         OnClick = btnIncluirClick
       end
@@ -741,8 +752,12 @@ inherited FrmClientes: TFrmClientes
         ResHandle = 0
       end
       inherited btnRetornar: TsuiButton
+        Left = 617
         TabOrder = 4
       end
     end
+  end
+  inherited Timer1: TTimer
+    OnTimer = Timer1Timer
   end
 end

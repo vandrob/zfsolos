@@ -1,0 +1,134 @@
+unit uFrmSolosEdicao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uFrmPadraoEdicao, SUIButton, SUIImagePanel, ExtCtrls, SUIForm,
+  StdCtrls, SUIEdit;
+
+type
+  TFrmSolosEdicao = class(TFrmPadraoEdicao)
+    txtID: TsuiEdit;
+    txtOPERACAO: TLabel;
+    txtNome: TsuiEdit;
+    Label1: TLabel;
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarCampos(strOperacao: string);
+  end;
+
+var
+  FrmSolosEdicao: TFrmSolosEdicao;
+
+implementation
+
+uses uDatamodule,uFuncoes;
+
+{$R *.dfm}
+
+procedure TFrmSolosEdicao.btnExcluirClick(Sender: TObject);
+
+var
+ strSQL:string;
+begin
+  inherited;
+  strSQL:='DELETE FROM zf_solos WHERE id='+trimright(trimleft(txtID.Text));
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.qryLocal_Solos.Refresh;
+  close;
+end;
+
+procedure TFrmSolosEdicao.btnSalvarClick(Sender: TObject);
+var
+ strSQL,strOperacao:string;
+begin
+
+  inherited;
+
+  if not campoPreenchido(txtNome.Text   , 'O Campo [ NOME ] é de preenchimento obrigatório')   then begin txtNome.SetFocus; exit; end;
+
+
+  strOperacao:= copy(txtOPERACAO.caption,0,1);
+
+  if (strOperacao='I') then
+   begin
+    strSQL:='INSERT INTO zf_solos ('+
+            ' nome     '+
+            ' ) VALUES ( '+
+            aspas( txtNome.text )+')';
+
+   end
+  else if (strOperacao='A') then
+   begin
+     strSQL:='UPDATE zf_solos SET '+
+             '  nome      = '+ aspas( txtNome.text )+
+             ' WHERE '+
+             '  id='+aspas( txtID.Text );
+   end
+  ;
+
+
+
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.qryLocal_Solos.Refresh;
+  close;
+
+
+end;
+
+procedure TFrmSolosEdicao.carregarCampos(strOperacao: string);
+begin
+if (strOperacao='I') then txtOPERACAO.caption:='INCLUIR REGISTRO';
+ if (strOperacao='A') then txtOPERACAO.caption:='ALTERAR REGISTRO';
+ if (strOperacao='E') then txtOPERACAO.caption:='EXCLUIR REGISTRO';
+
+
+ txtID.Text   :='0';
+ txtNome.Text :='';
+
+ if (strOperacao<>'I') then
+  begin
+   txtID.Text       :=trimright(trimleft( datamodule1.qryLocal_Solosid.AsString ));
+   txtNome.Text     :=trimright(trimleft( datamodule1.qryLocal_Solosnome.AsString));
+  end;
+
+   txtNome.Enabled:=strOperacao<>'E';
+
+   if (strOperacao<>'E') then
+    begin
+     btnSalvar.Visible:=true;
+     btnCancelar.Visible:=true;
+     btnExcluir.Visible:=false;
+    end
+   else
+    begin
+     btnSalvar.Visible:=false;
+     btnCancelar.Visible:=true;
+     btnExcluir.Visible:=true;
+    end
+   ;
+end;
+
+procedure TFrmSolosEdicao.FormActivate(Sender: TObject);
+begin
+
+inherited;
+  if btnSalvar.Visible then
+   txtNome.SetFocus
+  else
+   btnExcluir.SetFocus
+  ;
+  if (txtNome.Text='NAO DEFINIDO') then begin
+      myMSG('Não pode ser editado ou Excluído'#13+#10+'pois ele é utilizado pelo sistema'+#13+#10+'em lançamentos onde o usuário não'+#13+#10+' efetua preenchimentos corretamente','ATENÇÃO',2);
+      btnsalvar.Visible:=false;
+      btnexcluir.Visible:=false;
+  end;
+end;
+
+end.

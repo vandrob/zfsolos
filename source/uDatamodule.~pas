@@ -45,8 +45,15 @@ type
     qryLocal_Obrasdestinacao: TStringField;
     qryLocal_Obrasobservacoes: TStringField;
     qryLocal_Obrascodigo_referencia: TStringField;
-    connLocal: TZConnection;
     connMYSQL: TZConnection;
+    qryLocal_Estacas_Tipos: TZQuery;
+    qryLocal_Estacas_Tiposid: TIntegerField;
+    qryLocal_Estacas_Tiposnome: TStringField;
+    dsLocal_Estacas_Tipos: TDataSource;
+    qryLocal_Solos: TZQuery;
+    qryLocal_Solosid: TIntegerField;
+    qryLocal_Solosnome: TStringField;
+    dsLocal_Solos: TDataSource;
   private
     { Private declarations }
   public

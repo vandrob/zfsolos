@@ -33,6 +33,10 @@ type
     ActBackup: TAction;
     Metodos1: TMenuItem;
     ImageList1: TImageList;
+    ActEstacasTipos: TAction;
+    iposdeEstacas1: TMenuItem;
+    ActSolos: TAction;
+    iposdeSolos1: TMenuItem;
     procedure btnSairClick(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
     procedure ActBackupExecute(Sender: TObject);
@@ -44,6 +48,9 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormActivate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure ActCalculosExecute(Sender: TObject);
+    procedure ActEstacasTiposExecute(Sender: TObject);
+    procedure ActSolosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +62,8 @@ var
 
 implementation
 
-uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes;
+uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes, uFrmEstacas_Tipos,
+  uFrmSolos;
 
 
 {$R *.dfm}
@@ -139,6 +147,28 @@ end;
 procedure TFrmAbertura.FormKeyPress(Sender: TObject; var Key: Char);
 begin
  if key=#27 then close;
+end;
+
+procedure TFrmAbertura.ActCalculosExecute(Sender: TObject);
+begin
+   myMSG('Em Desenvolvimento...');
+end;
+
+procedure TFrmAbertura.ActEstacasTiposExecute(Sender: TObject);
+begin
+
+   if not assigned(FrmEstacas_Tipos) then
+                 FrmEstacas_Tipos:=TFrmEstacas_Tipos.Create(Application);
+                 FrmEstacas_Tipos.ShowModal;
+                 FreeAndNil(FrmEstacas_Tipos);
+end;
+
+procedure TFrmAbertura.ActSolosExecute(Sender: TObject);
+begin
+ if not assigned(FrmSolos) then
+                 FrmSolos:=TFrmSolos.Create(Application);
+                 FrmSolos.ShowModal;
+                 FreeAndNil(FrmSolos);
 end;
 
 end.

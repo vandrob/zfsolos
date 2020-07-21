@@ -11,6 +11,8 @@ type
     Image1: TImage;
     BtnConectar: TBitBtn;
     btnSair: TBitBtn;
+    procedure BtnConectarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,6 +24,35 @@ var
 
 implementation
 
+uses uDatamodule,uFuncoes, uFrmAbertura;
 {$R *.dfm}
+
+procedure TFrmConexao.BtnConectarClick(Sender: TObject);
+begin
+ try
+  begin
+   Datamodule1.connMYSQL.Connected:=true;
+   hide;
+   
+   if not assigned(FrmAbertura) then
+                 FrmAbertura:=TFrmAbertura.Create(Application);
+                 FrmAbertura.ShowModal;
+                 FreeAndNil(FrmAbertura);
+
+  end
+  except on E:  Exception  do
+   begin
+      ShowMessage('Não foi possível conectar-se ao servidor, tente mais tarde');
+   end
+   else
+       ShowMessage('Unknown error');
+ end;
+end;
+
+procedure TFrmConexao.btnSairClick(Sender: TObject);
+begin
+ if Datamodule1.connMYSQL.Connected=true then Datamodule1.connMYSQL.Connected:=false;
+ application.Terminate;
+end;
 
 end.
