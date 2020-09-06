@@ -48,12 +48,32 @@ type
     connMYSQL: TZConnection;
     qryLocal_Estacas_Tipos: TZQuery;
     qryLocal_Estacas_Tiposid: TIntegerField;
-    qryLocal_Estacas_Tiposnome: TStringField;
     dsLocal_Estacas_Tipos: TDataSource;
     qryLocal_Solos: TZQuery;
     qryLocal_Solosid: TIntegerField;
     qryLocal_Solosnome: TStringField;
     dsLocal_Solos: TDataSource;
+    qryLocal_Diametros: TZQuery;
+    dsLocal_Diametros: TDataSource;
+    qryLocal_Diametrosid: TIntegerField;
+    qryLocal_Diametrosdiametro: TFloatField;
+    qryLocal_Diametrosid_estacas_tipos: TIntegerField;
+    qryLocal_Metodos: TZQuery;
+    dsLocal_Metodos: TDataSource;
+    qryLocal_Metodosid: TIntegerField;
+    qryLocal_Metodosnome: TStringField;
+    qryLocal_Metodosdescricao: TStringField;
+    qryLocal_Estacas_Tiposnome: TStringField;
+    qryLocal_Diametrossecao_1: TFloatField;
+    qryLocal_Diametrossecao_2: TFloatField;
+    qryLocal_Diametrosarea: TFloatField;
+    qryLocal_Diametrosperimetro: TFloatField;
+    qryLocal_Diametrosmetalica_bitola_letra: TStringField;
+    qryLocal_Diametrosmetalica_bitola_secao_1: TFloatField;
+    qryLocal_Diametrosmetalica_bitola_secao_2: TFloatField;
+    qryLocal_Diametrosmetalica_area_bruta: TFloatField;
+    qryLocal_Diametrosmetalica_perimetro: TFloatField;
+    qryLocal_Diametrosmetalica_area_plena: TFloatField;
   private
     { Private declarations }
   public

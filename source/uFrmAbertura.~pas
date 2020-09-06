@@ -50,7 +50,7 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure ActCalculosExecute(Sender: TObject);
     procedure ActEstacasTiposExecute(Sender: TObject);
-    procedure iposdeSolos1Click(Sender: TObject);
+    procedure ActSolosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,7 +62,8 @@ var
 
 implementation
 
-uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes, uFrmEstacas_Tipos;
+uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes, uFrmEstacas_Tipos,
+  uFrmSolos;
 
 
 {$R *.dfm}
@@ -162,7 +163,7 @@ begin
                  FreeAndNil(FrmEstacas_Tipos);
 end;
 
-procedure TFrmAbertura.iposdeSolos1Click(Sender: TObject);
+procedure TFrmAbertura.ActSolosExecute(Sender: TObject);
 begin
  if not assigned(FrmSolos) then
                  FrmSolos:=TFrmSolos.Create(Application);

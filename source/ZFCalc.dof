@@ -111,11 +111,11 @@ ProjectLang=
 RootDir=C:\Program Files (x86)\Borland\Delphi7\Bin\
 [Version Info]
 IncludeVerInfo=1
-AutoIncBuild=1
+AutoIncBuild=0
 MajorVer=1
 MinorVer=0
 Release=0
-Build=1
+Build=2
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=
-FileVersion=1.0.0.1
+FileVersion=1.0.0.2
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -138,3 +138,6 @@ Comments=
 c:\program files (x86)\borland\delphi7\Projects\Bpl\Engestrauss.bpl=Engestrauss
 c:\program files (x86)\borland\delphi7\Bin\dcltee70.bpl=TeeChart Components
 c:\program files (x86)\borland\delphi7\Bin\dcldss70.bpl=Borland Decision Cube Components
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

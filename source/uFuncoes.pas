@@ -14,6 +14,7 @@ uses
  function campoPreenchido(vlrConteudo:Variant; strMensagem:string='Este campo é de preenchimento obrigatório'):boolean;
  function login:boolean;
  function retornarCampo(strTabela,strCampo,strWhere,strOrderByFields:string):string;
+ Function  VirgulaParaPonto(s:string):string; 
 
 var
   usuario_nome   :string;
@@ -225,6 +226,19 @@ begin
 end;
 
 
+Function  VirgulaParaPonto(s:string):string;
+var
+ i,t:integer;
+ l:string;
+begin
+ t:=length(s);
+ result:='';
+ for i:=1 to t do begin
+  l:=copy(s,i,1);
+  if l=',' then l:='.';
+  result:=result+l;
+ end;
+end;
 
 initialization
   usuario_nome:='';

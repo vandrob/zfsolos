@@ -17,7 +17,11 @@ uses
   uFrmEstacas_Tipos in 'uFrmEstacas_Tipos.pas' {FrmEstacas_Tipos},
   uFrmEstacas_TiposEdicao in 'uFrmEstacas_TiposEdicao.pas' {FrmEstacas_TiposEdicao},
   uFrmSolos in 'uFrmSolos.pas' {FrmSolos},
-  uFrmSolosEdicao in 'uFrmSolosEdicao.pas' {FrmSolosEdicao};
+  uFrmSolosEdicao in 'uFrmSolosEdicao.pas' {FrmSolosEdicao},
+  uFrmDiametros in 'uFrmDiametros.pas' {FrmDiametros},
+  uFrmDiametrosEdicao in 'uFrmDiametrosEdicao.pas' {FrmDiametrosEdicao},
+  uFrmMetodos in 'uFrmMetodos.pas' {FrmMetodos},
+  uFrmMetodosEdicao in 'uFrmMetodosEdicao.pas' {FrmMetodosEdicao};
 
 {$R *.res}
 

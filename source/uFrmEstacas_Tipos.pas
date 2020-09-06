@@ -9,6 +9,7 @@ uses
 
 type
   TFrmEstacas_Tipos = class(TFrmPadrao)
+    btnDiametro: TsuiButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnIncluirClick(Sender: TObject);
@@ -16,19 +17,22 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure suiDBGrid1CellClick(Column: TColumn);
+    procedure btnDiametroClick(Sender: TObject);
   private
     { Private declarations }
     Procedure chamarTelaEdicao(strOpcao: string);
+    procedure chamarTelaDiametros;
   public
     { Public declarations }
   end;
 
 var
   FrmEstacas_Tipos: TFrmEstacas_Tipos;
-
+  wIdTipo:String;
 implementation
 
-uses uDatamodule,uFuncoes, uFrmEstacas_TiposEdicao;
+uses uDatamodule,uFuncoes, uFrmEstacas_TiposEdicao, uFrmDiametros;
 
 {$R *.dfm}
 
@@ -60,7 +64,6 @@ end;
 
 procedure TFrmEstacas_Tipos.btnExcluirClick(Sender: TObject);
 begin
-  inherited;
   chamarTelaEdicao('E')
 end;
 
@@ -101,6 +104,47 @@ procedure TFrmEstacas_Tipos.FormActivate(Sender: TObject);
 begin
   inherited;
   timer1.Enabled:=true;
+   wIdTipo:=trimright(trimleft(uDatamodule.DataModule1.qryLocal_Estacas_Tiposid.AsString));
 end;
 
+procedure TFrmEstacas_Tipos.chamarTelaDiametros;
+begin
+  //carregar os diametros do tipo de estaca escolhido.
+
+  udatamodule.DataModule1.qryLocal_Diametros.Close;
+  udatamodule.DataModule1.qryLocal_Diametros.ParamByName('id').AsString:=widTipo;
+  udatamodule.DataModule1.qryLocal_Diametros.open;
+
+
+   if not assigned(FrmDiametros) then
+                 FrmDiametros:=TFrmDiametros.Create(Application);
+                 FrmDiametros.idtipo.Text:=wIdTipo;
+                 FrmDiametros.txtTitulo.Caption:='Diâmetros do Tipo '+udatamodule.DataModule1.qryLocal_Estacas_Tiposnome.AsString;
+                 FrmDiametros.ShowModal;
+                 FreeAndNil(FrmDiametros);
+
+  udatamodule.DataModule1.qryLocal_Diametros.Close;
+
+end;
+
+procedure TFrmEstacas_Tipos.suiDBGrid1CellClick(Column: TColumn);
+begin
+  inherited;
+  wIdTipo:=trimright(trimleft(uDatamodule.DataModule1.qryLocal_Estacas_Tiposid.AsString));
+
+end;
+
+procedure TFrmEstacas_Tipos.btnDiametroClick(Sender: TObject);
+begin
+  inherited;
+ if (wIdTipo='') then begin
+     myMSG('Clique no tipo de estaca para editar seus diâmetros!');
+     exit;
+  end;
+
+  chamarTelaDiametros();
+end;
+
+initialization
+ wIdTipo:='';
 end.

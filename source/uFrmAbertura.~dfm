@@ -10160,7 +10160,6 @@ object FrmAbertura: TFrmAbertura
       end
       object iposdeSolos1: TMenuItem
         Action = ActSolos
-        OnClick = iposdeSolos1Click
       end
       object Usurios1: TMenuItem
         Action = ActCalculos
@@ -10205,6 +10204,7 @@ object FrmAbertura: TFrmAbertura
     object ActSolos: TAction
       Caption = 'Tipos de S&olos'
       ImageIndex = 13
+      OnExecute = ActSolosExecute
     end
     object ActMetodos: TAction
       Caption = 'M&etodos'

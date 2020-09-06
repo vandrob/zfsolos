@@ -73,7 +73,7 @@ begin
 if strOpcao<>'I' then begin
  if datamodule1.qryLocal_Obras.RecordCount = 0 then
   begin
-       myMSG( 'Tabela Vazia! ');
+       myMSG( 'Tabela Vazia! ','Opção não disponível',2);
        exit;
   end
 end;

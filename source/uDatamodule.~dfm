@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 677
-  Top = 258
+  Left = 923
+  Top = 229
   Height = 587
   Width = 401
   object connSQLITE: TZConnection
@@ -250,8 +250,8 @@ object DataModule1: TDataModule1
   end
   object dslocal_obras: TDataSource
     DataSet = qryLocal_Obras
-    Left = 160
-    Top = 264
+    Left = 152
+    Top = 8
   end
   object connMYSQL: TZConnection
     ControlsCodePage = cGET_ACP
@@ -282,17 +282,15 @@ object DataModule1: TDataModule1
       Visible = False
     end
     object qryLocal_Estacas_Tiposnome: TStringField
-      DisplayLabel = 'Tipo de Estaca'
-      DisplayWidth = 100
       FieldName = 'nome'
       Required = True
-      Size = 180
+      Size = 500
     end
   end
   object dsLocal_Estacas_Tipos: TDataSource
     DataSet = qryLocal_Estacas_Tipos
-    Left = 200
-    Top = 392
+    Left = 232
+    Top = 40
   end
   object qryLocal_Solos: TZQuery
     Connection = connMYSQL
@@ -305,16 +303,153 @@ object DataModule1: TDataModule1
     object qryLocal_Solosid: TIntegerField
       FieldName = 'id'
       Required = True
+      Visible = False
     end
     object qryLocal_Solosnome: TStringField
       DisplayLabel = 'Nome do Tipo de Solo'
+      DisplayWidth = 100
       FieldName = 'nome'
       Size = 45
     end
   end
   object dsLocal_Solos: TDataSource
     DataSet = qryLocal_Solos
-    Left = 200
-    Top = 472
+    Left = 296
+    Top = 64
+  end
+  object qryLocal_Diametros: TZQuery
+    Connection = connMYSQL
+    ReadOnly = True
+    SQL.Strings = (
+      
+        'SELECT * FROM zf_diametros  WHERE id_estacas_tipos=:id ORDER BY ' +
+        'id_estacas_tipos,diametro;')
+    Params = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptUnknown
+        Value = '7'
+      end>
+    Left = 288
+    Top = 232
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptUnknown
+        Value = '7'
+      end>
+    object qryLocal_Diametrosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qryLocal_Diametrosid_estacas_tipos: TIntegerField
+      FieldName = 'id_estacas_tipos'
+      Required = True
+    end
+    object qryLocal_Diametrosdiametro: TFloatField
+      FieldName = 'diametro'
+      Required = True
+      DisplayFormat = '#,###.00'
+    end
+    object qryLocal_Diametrossecao_1: TFloatField
+      DisplayLabel = 'Secao 1 (Largura)'
+      FieldName = 'secao_1'
+      Required = True
+      DisplayFormat = '#,###.00'
+    end
+    object qryLocal_Diametrossecao_2: TFloatField
+      DisplayLabel = 'Secao 2 (Profundidade)'
+      FieldName = 'secao_2'
+      Required = True
+      DisplayFormat = '#,###.00'
+    end
+    object qryLocal_Diametrosarea: TFloatField
+      DisplayLabel = #193'rea'
+      FieldName = 'area'
+      Required = True
+      DisplayFormat = '#,###.00'
+    end
+    object qryLocal_Diametrosperimetro: TFloatField
+      DisplayLabel = 'Per'#237'metro'
+      FieldName = 'perimetro'
+      Required = True
+      DisplayFormat = '#,###.00'
+    end
+    object qryLocal_Diametrosmetalica_bitola_letra: TStringField
+      DisplayLabel = 'Met'#225'lica Bitola Letra'
+      FieldName = 'metalica_bitola_letra'
+      Size = 5
+    end
+    object qryLocal_Diametrosmetalica_bitola_secao_1: TFloatField
+      DisplayLabel = 'Met'#225'lica Bitola Se'#231#227'o 1'
+      FieldName = 'metalica_bitola_secao_1'
+      Required = True
+      DisplayFormat = '###,##0.00'
+    end
+    object qryLocal_Diametrosmetalica_bitola_secao_2: TFloatField
+      DisplayLabel = 'M'#233't'#225'lica Bitola Se'#231#227'o 2'
+      FieldName = 'metalica_bitola_secao_2'
+      Required = True
+      DisplayFormat = '###,##0.00'
+    end
+    object qryLocal_Diametrosmetalica_area_bruta: TFloatField
+      DisplayLabel = 'Met'#225'lica '#193'rea Bruta'
+      FieldName = 'metalica_area_bruta'
+      Required = True
+      DisplayFormat = '###,##0.00'
+    end
+    object qryLocal_Diametrosmetalica_perimetro: TFloatField
+      DisplayLabel = 'Met'#225'lica Per'#237'metro'
+      FieldName = 'metalica_perimetro'
+      Required = True
+      DisplayFormat = '###,##0.00'
+    end
+    object qryLocal_Diametrosmetalica_area_plena: TFloatField
+      DisplayLabel = 'Met'#225'lica '#193'rea Plena'
+      FieldName = 'metalica_area_plena'
+      Required = True
+      DisplayFormat = '###,##0.00'
+    end
+  end
+  object dsLocal_Diametros: TDataSource
+    DataSet = qryLocal_Diametros
+    Left = 288
+    Top = 320
+  end
+  object qryLocal_Metodos: TZQuery
+    Connection = connMYSQL
+    SQL.Strings = (
+      'SELECT * FROM zf_metodos ORDER BY nome;')
+    Params = <>
+    Properties.Strings = (
+      'SELECT * FROM zf_metodos ORDER BY nome;')
+    Left = 168
+    Top = 440
+    object qryLocal_Metodosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+      Visible = False
+    end
+    object qryLocal_Metodosnome: TStringField
+      DisplayLabel = 'Nome do M'#233'todo'
+      DisplayWidth = 60
+      FieldName = 'nome'
+      Required = True
+      Size = 45
+    end
+    object qryLocal_Metodosdescricao: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      DisplayWidth = 100
+      FieldName = 'descricao'
+      Required = True
+      Size = 45
+    end
+  end
+  object dsLocal_Metodos: TDataSource
+    DataSet = qryLocal_Metodos
+    Left = 272
+    Top = 432
   end
 end

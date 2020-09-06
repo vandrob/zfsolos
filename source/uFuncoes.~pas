@@ -167,6 +167,8 @@ begin
  usuario_nome:='';
  usuario_id  :='';
  usuario_logado:=false;
+ usuario_admin:='';
+ usuario_ativo:='';
  status:=false;
 
 

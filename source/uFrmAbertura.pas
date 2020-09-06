@@ -63,7 +63,7 @@ var
 implementation
 
 uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes, uFrmEstacas_Tipos,
-  uFrmSolos;
+  uFrmSolos, uFrmMetodos;
 
 
 {$R *.dfm}
@@ -90,7 +90,9 @@ end;
 
 procedure TFrmAbertura.ActMetodosExecute(Sender: TObject);
 begin
- myMSG('Em Desenvolvimento...');
+ if not assigned(FrmMetodos) then FrmMetodos:=TFrmMetodos.create(Application);
+  FrmMetodos.showmodal;
+  FreeAndNil( FrmMetodos );
 end;
 
 procedure TFrmAbertura.ActUsuariosExecute(Sender: TObject);
