@@ -37,6 +37,8 @@ type
     iposdeEstacas1: TMenuItem;
     ActSolos: TAction;
     iposdeSolos1: TMenuItem;
+    EstacasxSolosAlphaBeta1: TMenuItem;
+    ActEstacasSolos: TAction;
     procedure btnSairClick(Sender: TObject);
     procedure ActClientesExecute(Sender: TObject);
     procedure ActBackupExecute(Sender: TObject);
@@ -51,6 +53,7 @@ type
     procedure ActCalculosExecute(Sender: TObject);
     procedure ActEstacasTiposExecute(Sender: TObject);
     procedure ActSolosExecute(Sender: TObject);
+    procedure ActEstacasSolosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -63,7 +66,7 @@ var
 implementation
 
 uses uFuncoes, uFrmUsuarios, uFrmTeste, uFrmClientes, uFrmEstacas_Tipos,
-  uFrmSolos, uFrmMetodos;
+  uFrmSolos, uFrmMetodos, uFrmEstacasSolos;
 
 
 {$R *.dfm}
@@ -171,6 +174,14 @@ begin
                  FrmSolos:=TFrmSolos.Create(Application);
                  FrmSolos.ShowModal;
                  FreeAndNil(FrmSolos);
+end;
+
+procedure TFrmAbertura.ActEstacasSolosExecute(Sender: TObject);
+begin
+  if not assigned(FrmEstacasSolos) then
+                 FrmEstacasSolos:=TFrmEstacasSolos.Create(Application);
+                 FrmEstacasSolos.ShowModal;
+                 FreeAndNil(FrmEstacasSolos);
 end;
 
 end.

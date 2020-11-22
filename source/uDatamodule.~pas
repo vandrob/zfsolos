@@ -74,6 +74,27 @@ type
     qryLocal_Diametrosmetalica_area_bruta: TFloatField;
     qryLocal_Diametrosmetalica_perimetro: TFloatField;
     qryLocal_Diametrosmetalica_area_plena: TFloatField;
+    qryLocal_Solosknm2: TFloatField;
+    qryLocal_EstacasSolos: TZQuery;
+    dsLocal_EstacasSolos: TDataSource;
+    qryLocal_EstacasSolosid: TIntegerField;
+    qryLocal_EstacasSolosidestacas: TIntegerField;
+    qryLocal_EstacasSolosestaca: TStringField;
+    qryLocal_EstacasSolosidsolos: TIntegerField;
+    qryLocal_EstacasSolossolo: TStringField;
+    qryLocal_EstacasSolosvlr_alpha: TFloatField;
+    qryLocal_EstacasSolosvlr_beta: TFloatField;
+    qryLocal_Estacas_Tiposf1: TFloatField;
+    qryLocal_Estacas_Tiposf2: TFloatField;
+    QryLocal_ObrasFuros: TZQuery;
+    dsLocal_ObrasFuros: TDataSource;
+    QryLocal_ObrasFurosid: TIntegerField;
+    QryLocal_ObrasFurosiddiametro: TIntegerField;
+    QryLocal_ObrasFurosdiametro: TFloatField;
+    QryLocal_ObrasFurosdescricao_estaca: TStringField;
+    QryLocal_ObrasFurosdescricaofuro: TStringField;
+    QryLocal_ObrasFuroscota_sondagem: TFloatField;
+    QryLocal_ObrasFuroscota_arrasamento: TFloatField;
   private
     { Private declarations }
   public

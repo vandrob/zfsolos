@@ -2,8 +2,8 @@ object DataModule1: TDataModule1
   OldCreateOrder = False
   Left = 923
   Top = 229
-  Height = 587
-  Width = 401
+  Height = 739
+  Width = 541
   object connSQLITE: TZConnection
     ControlsCodePage = cCP_UTF8
     UTF8StringsAsWideField = False
@@ -282,9 +282,22 @@ object DataModule1: TDataModule1
       Visible = False
     end
     object qryLocal_Estacas_Tiposnome: TStringField
+      DisplayWidth = 50
       FieldName = 'nome'
       Required = True
       Size = 500
+    end
+    object qryLocal_Estacas_Tiposf1: TFloatField
+      DisplayLabel = '(Par'#226'metro) f1'
+      FieldName = 'f1'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryLocal_Estacas_Tiposf2: TFloatField
+      DisplayLabel = '(Par'#226'metro) f2'
+      FieldName = 'f2'
+      Required = True
+      DisplayFormat = '####0;00'
     end
   end
   object dsLocal_Estacas_Tipos: TDataSource
@@ -310,6 +323,12 @@ object DataModule1: TDataModule1
       DisplayWidth = 100
       FieldName = 'nome'
       Size = 45
+    end
+    object qryLocal_Solosknm2: TFloatField
+      DisplayLabel = 'KN/m2'
+      FieldName = 'knm2'
+      Required = True
+      DisplayFormat = '#####0.00'
     end
   end
   object dsLocal_Solos: TDataSource
@@ -351,31 +370,31 @@ object DataModule1: TDataModule1
     object qryLocal_Diametrosdiametro: TFloatField
       FieldName = 'diametro'
       Required = True
-      DisplayFormat = '#,###.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrossecao_1: TFloatField
       DisplayLabel = 'Secao 1 (Largura)'
       FieldName = 'secao_1'
       Required = True
-      DisplayFormat = '#,###.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrossecao_2: TFloatField
       DisplayLabel = 'Secao 2 (Profundidade)'
       FieldName = 'secao_2'
       Required = True
-      DisplayFormat = '#,###.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosarea: TFloatField
       DisplayLabel = #193'rea'
       FieldName = 'area'
       Required = True
-      DisplayFormat = '#,###.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosperimetro: TFloatField
       DisplayLabel = 'Per'#237'metro'
       FieldName = 'perimetro'
       Required = True
-      DisplayFormat = '#,###.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosmetalica_bitola_letra: TStringField
       DisplayLabel = 'Met'#225'lica Bitola Letra'
@@ -386,31 +405,31 @@ object DataModule1: TDataModule1
       DisplayLabel = 'Met'#225'lica Bitola Se'#231#227'o 1'
       FieldName = 'metalica_bitola_secao_1'
       Required = True
-      DisplayFormat = '###,##0.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosmetalica_bitola_secao_2: TFloatField
       DisplayLabel = 'M'#233't'#225'lica Bitola Se'#231#227'o 2'
       FieldName = 'metalica_bitola_secao_2'
       Required = True
-      DisplayFormat = '###,##0.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosmetalica_area_bruta: TFloatField
       DisplayLabel = 'Met'#225'lica '#193'rea Bruta'
       FieldName = 'metalica_area_bruta'
       Required = True
-      DisplayFormat = '###,##0.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosmetalica_perimetro: TFloatField
       DisplayLabel = 'Met'#225'lica Per'#237'metro'
       FieldName = 'metalica_perimetro'
       Required = True
-      DisplayFormat = '###,##0.00'
+      DisplayFormat = '#,##0.00'
     end
     object qryLocal_Diametrosmetalica_area_plena: TFloatField
       DisplayLabel = 'Met'#225'lica '#193'rea Plena'
       FieldName = 'metalica_area_plena'
       Required = True
-      DisplayFormat = '###,##0.00'
+      DisplayFormat = '#,##0.00'
     end
   end
   object dsLocal_Diametros: TDataSource
@@ -425,8 +444,8 @@ object DataModule1: TDataModule1
     Params = <>
     Properties.Strings = (
       'SELECT * FROM zf_metodos ORDER BY nome;')
-    Left = 168
-    Top = 440
+    Left = 176
+    Top = 200
     object qryLocal_Metodosid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -451,5 +470,152 @@ object DataModule1: TDataModule1
     DataSet = qryLocal_Metodos
     Left = 272
     Top = 432
+  end
+  object qryLocal_EstacasSolos: TZQuery
+    Connection = connMYSQL
+    ReadOnly = True
+    SQL.Strings = (
+      'SELECT '#10
+      ' es.id,'#10
+      ' es.idestacas,'#10
+      ' e.nome as estaca,'#10
+      ' es.idsolos,'#10
+      ' s.nome as solo,'#10
+      ' es.vlr_alpha,'#10
+      ' es.vlr_beta '#10
+      'FROM '#10
+      '  zf_estacas_solos es'#10
+      '  INNER JOIN zf_estacas_tipos e ON (e.id=es.idestacas)'#10
+      '  INNER JOIN zf_solos s  ON (s.id=es.idsolos)'#10
+      'ORDER BY'#10
+      '  e.nome,s.nome,es.id')
+    Params = <>
+    Left = 168
+    Top = 264
+    object qryLocal_EstacasSolosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+      Visible = False
+    end
+    object qryLocal_EstacasSolosidestacas: TIntegerField
+      FieldName = 'idestacas'
+      Required = True
+      Visible = False
+    end
+    object qryLocal_EstacasSolosestaca: TStringField
+      DisplayLabel = 'Tipo de Estaca'
+      DisplayWidth = 40
+      FieldName = 'estaca'
+      Required = True
+      Size = 500
+    end
+    object qryLocal_EstacasSolosidsolos: TIntegerField
+      FieldName = 'idsolos'
+      Required = True
+      Visible = False
+    end
+    object qryLocal_EstacasSolossolo: TStringField
+      DisplayLabel = 'Tipo de Solo'
+      DisplayWidth = 40
+      FieldName = 'solo'
+      Size = 45
+    end
+    object qryLocal_EstacasSolosvlr_alpha: TFloatField
+      DisplayLabel = 'Alpha'
+      FieldName = 'vlr_alpha'
+      Required = True
+      DisplayFormat = '####,##0.00'
+    end
+    object qryLocal_EstacasSolosvlr_beta: TFloatField
+      DisplayLabel = 'Beta'
+      FieldName = 'vlr_beta'
+      Required = True
+      DisplayFormat = '####,##0.00'
+    end
+  end
+  object dsLocal_EstacasSolos: TDataSource
+    DataSet = qryLocal_EstacasSolos
+    Left = 272
+    Top = 504
+  end
+  object QryLocal_ObrasFuros: TZQuery
+    Connection = connMYSQL
+    ReadOnly = True
+    SQL.Strings = (
+      'SELECT '
+      ' f.id,'
+      ' f.iddiametro,'
+      ' d.diametro,'
+      ' t.nome as descricao_estaca,'
+      ' f.descricaofuro,'
+      ' f.cota_sondagem,'
+      ' f.cota_arrasamento'
+      'FROM '
+      ' zf_furos f'
+      ' inner join zf_diametros d on d.id=f.iddiametro'
+      ' inner join zf_estacas_tipos t on t.id=d.id_estacas_tipos'
+      'WHERE '
+      ' f.idobra=:parID'
+      'ORDER BY'
+      ' f.idobra, f.descricaofuro')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'parID'
+        ParamType = ptUnknown
+      end>
+    Left = 48
+    Top = 552
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'parID'
+        ParamType = ptUnknown
+      end>
+    object QryLocal_ObrasFurosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+      Visible = False
+    end
+    object QryLocal_ObrasFurosiddiametro: TIntegerField
+      FieldName = 'iddiametro'
+      Required = True
+      Visible = False
+    end
+    object QryLocal_ObrasFurosdiametro: TFloatField
+      DisplayLabel = 'Di'#226'metro'
+      FieldName = 'diametro'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object QryLocal_ObrasFurosdescricao_estaca: TStringField
+      DisplayLabel = 'Tipo da Estaca'
+      DisplayWidth = 50
+      FieldName = 'descricao_estaca'
+      Required = True
+      Size = 500
+    end
+    object QryLocal_ObrasFurosdescricaofuro: TStringField
+      DisplayLabel = 'Identifica'#231#227'o do Furo'
+      FieldName = 'descricaofuro'
+      Size = 45
+    end
+    object QryLocal_ObrasFuroscota_sondagem: TFloatField
+      DisplayLabel = 'Cota de Sondagem'
+      FieldName = 'cota_sondagem'
+      Required = True
+      DisplayFormat = '#####0.00'
+    end
+    object QryLocal_ObrasFuroscota_arrasamento: TFloatField
+      DisplayLabel = 'Cota de Arrasamento'
+      FieldName = 'cota_arrasamento'
+      Required = True
+      DisplayFormat = '#####0.00'
+    end
+  end
+  object dsLocal_ObrasFuros: TDataSource
+    DataSet = QryLocal_ObrasFuros
+    Left = 168
+    Top = 552
   end
 end

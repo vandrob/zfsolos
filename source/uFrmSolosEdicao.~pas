@@ -13,6 +13,8 @@ type
     txtOPERACAO: TLabel;
     txtNome: TsuiEdit;
     Label1: TLabel;
+    Label2: TLabel;
+    txtKNM2: TsuiNumberEdit;
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -20,7 +22,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure carregarCampos(strOperacao: string);
+   procedure carregarCampos(strOperacao:string='I');
   end;
 
 var
@@ -46,7 +48,7 @@ end;
 
 procedure TFrmSolosEdicao.btnSalvarClick(Sender: TObject);
 var
- strSQL,strOperacao:string;
+ strSQL,strOperacao,vlr:string;
 begin
 
   inherited;
@@ -55,19 +57,23 @@ begin
 
 
   strOperacao:= copy(txtOPERACAO.caption,0,1);
+  vlr:=  aspas( VirgulaParaPonto( txtKnm2.Text ) )   ;
+
 
   if (strOperacao='I') then
    begin
     strSQL:='INSERT INTO zf_solos ('+
-            ' nome     '+
+            ' nome,knm2     '+
             ' ) VALUES ( '+
-            aspas( txtNome.text )+')';
+            aspas( txtNome.text )+','+
+            vlr+')';
 
    end
   else if (strOperacao='A') then
    begin
      strSQL:='UPDATE zf_solos SET '+
-             '  nome      = '+ aspas( txtNome.text )+
+             '  nome      = '+ aspas( txtNome.text )+',' +
+             '  knm2      = '+ vlr +
              ' WHERE '+
              '  id='+aspas( txtID.Text );
    end
@@ -96,6 +102,7 @@ if (strOperacao='I') then txtOPERACAO.caption:='INCLUIR REGISTRO';
   begin
    txtID.Text       :=trimright(trimleft( datamodule1.qryLocal_Solosid.AsString ));
    txtNome.Text     :=trimright(trimleft( datamodule1.qryLocal_Solosnome.AsString));
+   txtKnM2.Value    :=StrToFloat( datamodule1.qryLocal_Solosknm2.AsString);
   end;
 
    txtNome.Enabled:=strOperacao<>'E';

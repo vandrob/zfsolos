@@ -716,7 +716,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         UIStyle = BlueGlass
         BorderColor = clBlack
         CharCase = ecUpperCase
-        TabOrder = 3
+        TabOrder = 5
         Visible = False
       end
       object idtipo: TEdit
@@ -724,7 +724,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Top = 24
         Width = 121
         Height = 21
-        TabOrder = 4
+        TabOrder = 6
         Text = 'idtipo'
         Visible = False
       end
@@ -761,7 +761,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 2
         Text = '0'
         Increment = 1
         MaxValue = 200
@@ -781,7 +781,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 3
         Text = '0'
         Increment = 1
         MaxValue = 200
@@ -793,7 +793,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Top = 90
         Width = 409
         Height = 62
-        TabOrder = 7
+        TabOrder = 1
         object Label1: TLabel
           Left = 8
           Top = 27
@@ -880,7 +880,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 4
         object Label11: TLabel
           Left = 8
           Top = 27
@@ -1084,7 +1084,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 7
         Text = '0,00'
         Mask = '0.00'
         AutoSelectSigns = 2
@@ -1103,7 +1103,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 8
         Text = '0,00'
         Mask = '0.00'
         AutoSelectSigns = 2

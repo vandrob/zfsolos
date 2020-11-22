@@ -13,6 +13,10 @@ type
     txtID: TsuiEdit;
     txtNome: TsuiEdit;
     Label1: TLabel;
+    Label2: TLabel;
+    txtF1: TsuiNumberEdit;
+    Label3: TLabel;
+    txtF2: TsuiNumberEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
@@ -44,11 +48,16 @@ begin
 
  txtID.Text   :='0';
  txtNome.Text :='';
+ txtF1.Value  :=0;
+ txtF2.Value  :=0;
 
  if (strOperacao<>'I') then
   begin
    txtID.Text       :=trimright(trimleft( datamodule1.qryLocal_Estacas_Tiposid.AsString ));
    txtNome.Text     :=trimright(trimleft( datamodule1.qryLocal_Estacas_Tiposnome.AsString));
+   txtF1.Value      :=StrToFloat( datamodule1.qryLocal_Estacas_Tiposf1.AsString);
+   txtF2.Value      :=StrToFloat( datamodule1.qryLocal_Estacas_Tiposf2.AsString);
+
   end;
 
    txtNome.Enabled:=strOperacao<>'E';
@@ -101,6 +110,8 @@ end;
 procedure TFrmEstacas_TiposEdicao.btnSalvarClick(Sender: TObject);
 var
  strSQL,strOperacao:string;
+ _id,_Nome,_F1,_F2:string;
+
 begin
 
   inherited;
@@ -110,20 +121,32 @@ begin
 
   strOperacao:= copy(txtOPERACAO.caption,0,1);
 
+  _id  :=  aspas( txtID.Text );
+  _Nome:=  aspas( txtNome.text );
+  _F1  :=  aspas( VirgulaParaPonto( txtF1.Text ) )   ;
+  _F2  :=  aspas( VirgulaParaPonto( txtF2.Text ) )   ;
+
+
+
   if (strOperacao='I') then
    begin
     strSQL:='INSERT INTO zf_estacas_tipos ('+
-            ' nome     '+
+            ' nome,f1,f2     '+
             ' ) VALUES ( '+
-            aspas( txtNome.text )+')';
+            _id   +',' +
+            _Nome +','+
+            _F1   +','+
+            _F2   +')';
 
    end
   else if (strOperacao='A') then
    begin
      strSQL:='UPDATE zf_estacas_tipos SET '+
-             '  nome      = '+ aspas( txtNome.text )+
+             '  nome       = '+ _Nome+','+
+             '  f1         = '+ _F1  +','+
+             '  f2         = '+ _F2  +   
              ' WHERE '+
-             '  id='+aspas( txtID.Text );
+             '  id = '+ _id;
    end
   ;
 

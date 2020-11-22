@@ -18,9 +18,11 @@ type
     suiDBEdit2: TsuiDBEdit;
     suiDBEdit3: TsuiDBEdit;
     suiDBEdit4: TsuiDBEdit;
+    btFuros: TsuiButton;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure btFurosClick(Sender: TObject);
   private
     { Private declarations }
     procedure chamarTelaEdicao(strOpcao: string);
@@ -34,7 +36,7 @@ var
 
 implementation
 
-uses uDatamodule,ufuncoes, uFrmClientesObrasEdicao;
+uses uDatamodule,ufuncoes, uFrmClientesObrasEdicao, uFrmObrasFuros;
 {$R *.dfm}
 
 procedure TFrmClientesObras.btnIncluirClick(Sender: TObject);
@@ -52,7 +54,6 @@ end;
 procedure TFrmClientesObras.btnExcluirClick(Sender: TObject);
 begin
   inherited;
-
      chamarTelaEdicao('E');
 end;
 
@@ -83,6 +84,29 @@ if not assigned(FrmClientesObrasEdicao) then
                  uFrmClientesObrasEdicao.FrmClientesObrasEdicao.carregarCampos(strOpcao);
                  FrmClientesObrasEdicao.ShowModal;
                  FreeAndNil(FrmClientesObrasEdicao);
+end;
+
+procedure TFrmClientesObras.btFurosClick(Sender: TObject);
+var
+ idObra:string;
+begin
+  inherited;
+  if not assigned(FrmObrasFuros) Then FrmObrasfuros.create(application);
+  if udatamodule.DataModule1.qryLocal_Obras.eof then begin
+     showmessage('insira a obra e depois clique para seleciona-la');
+     exit;
+  end;
+  idObra:=uDatamodule.DataModule1.qryLocal_Obrasid.AsString;
+  FrmObrasFuros.txtID.Caption:= idObra;
+  FrmObrasFuros.txtObra.Caption:=uDatamodule.DataModule1.qryLocal_Obrasnome.AsString;
+  FrmObrasFuros.txtCliente.Caption:=uDataModule.DataModule1.qrylocal_clientesnome.AsString;
+
+  Datamodule1.QryLocal_ObrasFuros.Close;
+  Datamodule1.QryLocal_ObrasFuros.ParamByName('parID').Value:=idObra;
+  Datamodule1.QryLocal_ObrasFuros.Open;
+
+
+  frmObrasFuros.showmodal;
 end;
 
 end.

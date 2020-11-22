@@ -1,15 +1,15 @@
 inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
-  Left = 478
-  Top = 185
+  Left = 757
+  Top = 221
   Caption = 'FrmDiametrosEdicao'
   ClientHeight = 629
-  ClientWidth = 438
+  ClientWidth = 441
   OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
-    Width = 438
+    Width = 441
     Height = 629
     TitleBarSections = <
       item
@@ -604,7 +604,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
       end>
     inherited suiPanel2: TsuiPanel
       Top = 541
-      Width = 438
+      Width = 441
       inherited btnSalvar: TsuiButton
         Left = 56
         OnClick = btnSalvarClick
@@ -618,7 +618,7 @@ inherited FrmDiametrosEdicao: TFrmDiametrosEdicao
       end
     end
     inherited suiPanel1: TsuiPanel
-      Width = 438
+      Width = 441
       Height = 511
       object txtOPERACAO: TLabel
         Left = 25

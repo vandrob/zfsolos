@@ -151,7 +151,7 @@ begin
 
   inherited;
 
-  if not campoPreenchido( txtDiametro.Value   , 'O Campo [ Diâmetro ] é de preenchimento obrigatório')   then begin txtDiametro.SetFocus; exit; end;
+  //if not campoPreenchido( txtDiametro.Value   , 'O Campo [ Diâmetro ] é de preenchimento obrigatório')   then begin txtDiametro.SetFocus; exit; end;
 
 
   strOperacao:= copy(txtOPERACAO.caption,0,1);

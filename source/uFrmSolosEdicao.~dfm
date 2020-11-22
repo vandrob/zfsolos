@@ -1,13 +1,14 @@
 inherited FrmSolosEdicao: TFrmSolosEdicao
   Caption = 'FrmSolosEdicao'
-  ClientHeight = 198
+  ClientHeight = 240
   ClientWidth = 614
+  OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
     Width = 614
-    Height = 198
+    Height = 240
     TitleBarSections = <
       item
         AutoSize = True
@@ -600,7 +601,7 @@ inherited FrmSolosEdicao: TFrmSolosEdicao
         CapSec = False
       end>
     inherited suiPanel2: TsuiPanel
-      Top = 110
+      Top = 152
       Width = 614
       inherited btnSalvar: TsuiButton
         OnClick = btnSalvarClick
@@ -612,7 +613,7 @@ inherited FrmSolosEdicao: TFrmSolosEdicao
     end
     inherited suiPanel1: TsuiPanel
       Width = 614
-      Height = 80
+      Height = 122
       object txtOPERACAO: TLabel
         Left = 25
         Top = 24
@@ -635,6 +636,13 @@ inherited FrmSolosEdicao: TFrmSolosEdicao
         Height = 13
         Caption = 'Tipo de Solo:'
       end
+      object Label2: TLabel
+        Left = 24
+        Top = 80
+        Width = 35
+        Height = 13
+        Caption = 'KN/M2'
+      end
       object txtID: TsuiEdit
         Left = 106
         Top = 22
@@ -655,6 +663,25 @@ inherited FrmSolosEdicao: TFrmSolosEdicao
         BorderColor = clBlack
         CharCase = ecUpperCase
         TabOrder = 1
+      end
+      object txtKNM2: TsuiNumberEdit
+        Left = 105
+        Top = 74
+        Width = 68
+        Height = 28
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        Text = '0,00'
+        Mask = '0.00'
+        AutoSelectSigns = 2
+        BorderStyle = bsNone
       end
     end
   end

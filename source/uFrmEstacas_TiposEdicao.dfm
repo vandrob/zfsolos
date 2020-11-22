@@ -2,14 +2,15 @@ inherited FrmEstacas_TiposEdicao: TFrmEstacas_TiposEdicao
   Left = 475
   Top = 419
   Caption = 'FrmEstacas_TiposEdicao'
-  ClientHeight = 202
+  ClientHeight = 250
   ClientWidth = 616
+  OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
     Width = 616
-    Height = 202
+    Height = 250
     TitleBarSections = <
       item
         AutoSize = True
@@ -602,7 +603,7 @@ inherited FrmEstacas_TiposEdicao: TFrmEstacas_TiposEdicao
         CapSec = False
       end>
     inherited suiPanel2: TsuiPanel
-      Top = 114
+      Top = 162
       Width = 616
       inherited btnSalvar: TsuiButton
         OnClick = btnSalvarClick
@@ -614,7 +615,7 @@ inherited FrmEstacas_TiposEdicao: TFrmEstacas_TiposEdicao
     end
     inherited suiPanel1: TsuiPanel
       Width = 616
-      Height = 84
+      Height = 132
       object txtOPERACAO: TLabel
         Left = 25
         Top = 24
@@ -637,6 +638,20 @@ inherited FrmEstacas_TiposEdicao: TFrmEstacas_TiposEdicao
         Height = 13
         Caption = 'Nome:'
       end
+      object Label2: TLabel
+        Left = 22
+        Top = 83
+        Width = 45
+        Height = 13
+        Caption = 'Par'#226'm.F1'
+      end
+      object Label3: TLabel
+        Left = 176
+        Top = 86
+        Width = 45
+        Height = 13
+        Caption = 'Par'#226'm.F2'
+      end
       object txtID: TsuiEdit
         Left = 82
         Top = 22
@@ -657,6 +672,44 @@ inherited FrmEstacas_TiposEdicao: TFrmEstacas_TiposEdicao
         BorderColor = clBlack
         CharCase = ecUpperCase
         TabOrder = 1
+      end
+      object txtF1: TsuiNumberEdit
+        Left = 82
+        Top = 72
+        Width = 68
+        Height = 28
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        Text = '0,00'
+        Mask = '0.00'
+        AutoSelectSigns = 2
+        BorderStyle = bsNone
+      end
+      object txtF2: TsuiNumberEdit
+        Left = 233
+        Top = 72
+        Width = 68
+        Height = 28
+        UIStyle = BlueGlass
+        BorderColor = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        Text = '0,00'
+        Mask = '0.00'
+        AutoSelectSigns = 2
+        BorderStyle = bsNone
       end
     end
   end

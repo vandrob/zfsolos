@@ -1,0 +1,181 @@
+unit uFrmObrasFurosEdicao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, uFrmPadraoEdicao, SUIButton, SUIImagePanel, ExtCtrls, SUIForm,
+  StdCtrls, SUIEdit, DBCtrls, SUIDBCtrls;
+
+type
+  TFrmObrasFurosEdicao = class(TFrmPadraoEdicao)
+    GroupBox1: TGroupBox;
+    lbl1: TLabel;
+    Label1: TLabel;
+    cmbDiametro: TsuiDBLookupComboBox;
+    txtCotaSondagem: TsuiNumberEdit;
+    txtCotaArrasamento: TsuiNumberEdit;
+    txtNomeFuro: TsuiEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    txtObraNome: TDBText;
+    txtClienteNome: TDBText;
+    txtObraEndereco: TDBText;
+    txtOPERACAO: TLabel;
+    txtID: TsuiEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure txtNomeFuroKeyPress(Sender: TObject; var Key: Char);
+    procedure FormActivate(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarCampos(strOperacao:string='I');
+  end;
+
+var
+  FrmObrasFurosEdicao: TFrmObrasFurosEdicao;
+
+implementation
+
+{$R *.dfm}
+uses uDatamodule,uFuncoes;
+
+procedure TFrmObrasFurosEdicao.FormCreate(Sender: TObject);
+begin
+  inherited;
+  uDatamodule.DataModule1.qryDiametros.Open;
+end;
+
+procedure TFrmObrasFurosEdicao.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  uDatamodule.DataModule1.qryDiametros.close;
+end;
+
+procedure TFrmObrasFurosEdicao.carregarCampos(strOperacao: string);
+begin
+                                  
+ if (strOperacao='I') then txtOPERACAO.caption:='INCLUIR REGISTRO';
+ if (strOperacao='A') then txtOPERACAO.caption:='ALTERAR REGISTRO';
+ if (strOperacao='E') then txtOPERACAO.caption:='EXCLUIR REGISTRO';
+
+
+ txtID.Text   :='0';
+ txtNomeFuro.Text :='';
+ txtCotaSondagem.Text:='0';
+ txtCotaArrasamento.Text:='0';
+
+ if (strOperacao<>'I') then
+  begin
+   txtID.Text             :=trimright(trimleft( datamodule1.QryLocal_ObrasFurosid.AsString ));
+   txtNomeFuro.Text       :='';
+   txtCotaSondagem.Text   :='';
+   txtCotaArrasamento.Text:='';
+  end;
+
+   txtNomeFuro.Enabled:=strOperacao<>'E';
+   txtCotaSondagem.Enabled:=strOperacao<>'E';
+   txtCotaArrasamento.Enabled:=strOperacao<>'E';
+   cmbSolo.Enabled:=strOperacao<>'E';
+
+   if (strOperacao<>'E') then
+    begin
+     btnSalvar.Visible:=true;
+     btnCancelar.Visible:=true;
+     btnExcluir.Visible:=false;
+    end
+   else
+    begin
+     btnSalvar.Visible:=false;
+     btnCancelar.Visible:=true;
+     btnExcluir.Visible:=true;
+    end
+   ;
+
+end;
+
+procedure TFrmObrasFurosEdicao.txtNomeFuroKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if key=#13 then selectnext(Sender as Twincontrol,true,true)
+end;
+
+procedure TFrmObrasFurosEdicao.FormActivate(Sender: TObject);
+begin
+  inherited;
+  if btnSalvar.Visible then
+   txtNomeFuro.SetFocus
+  else
+   btnExcluir.SetFocus
+  ;
+
+end;
+
+procedure TFrmObrasFurosEdicao.btnExcluirClick(Sender: TObject);
+var
+ strSQL:string;
+begin
+  inherited;
+  strSQL:='DELETE FROM zf_furos WHERE id='+trimright(trimleft(txtID.Text));
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.QryLocal_ObrasFuros.Refresh;
+  close;
+
+
+end;
+
+procedure TFrmObrasFurosEdicao.btnSalvarClick(Sender: TObject);
+var
+ strSQL,strOperacao:string;
+begin
+
+  inherited;
+
+  if not campoPreenchido(txtNomeFuro.Text   , 'O Campo [ NOME ] é de preenchimento obrigatório')   then begin txtNomeFuro.SetFocus; exit; end;
+
+
+  strOperacao:= copy(txtOPERACAO.caption,0,1);
+
+  if (strOperacao='I') then
+   begin
+    strSQL:='INSERT INTO zf_furos ('+
+            ' idobra ,    '+
+            ' iddiametro,    '+
+            ' descricaofuro,    '+
+            ' cota_sondagem, '+
+            ' cota_arrasamento '+
+            ' ) VALUES ( '+
+            aspas(  uDatamodule.DataModule1.qryLocal_Obrasid.AsString )+','+
+            aspas( cmbDiametro.Text ) +','+
+            aspas( txtNomeFuro.Text )+','+
+            aspas( txtCotaSondagem.Text ) +','+
+            aspas( txtCotaArrasamento.Text )+')';
+
+   end
+  else if (strOperacao='A') then
+   begin
+     strSQL:='UPDATE zf_clientes SET '+
+             '  iddiametro  = '+ aspas( cmbDiametro.value )+','+
+             '  descricaofuro    = '+ aspas( txtNomeFuro.Text)+','+
+             '  cota_sondagem    = '+ aspas( txtCotaSondagem.Text)+','+
+             '  cota_arrasamento        = '+ aspas( txtCotaArrasamento.Text)+
+             ' WHERE '+
+             '  id='+aspas( txtID.Text );
+   end
+  ;
+
+
+
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.QryLocal_ObrasFuros.Refresh;
+  close;
+
+end;
+
+end.

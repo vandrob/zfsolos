@@ -21,7 +21,11 @@ uses
   uFrmDiametros in 'uFrmDiametros.pas' {FrmDiametros},
   uFrmDiametrosEdicao in 'uFrmDiametrosEdicao.pas' {FrmDiametrosEdicao},
   uFrmMetodos in 'uFrmMetodos.pas' {FrmMetodos},
-  uFrmMetodosEdicao in 'uFrmMetodosEdicao.pas' {FrmMetodosEdicao};
+  uFrmMetodosEdicao in 'uFrmMetodosEdicao.pas' {FrmMetodosEdicao},
+  uFrmEstacasSolos in 'uFrmEstacasSolos.pas' {FrmEstacasSolos},
+  uFrmEstacasSolosEdicao in 'uFrmEstacasSolosEdicao.pas' {FrmEstacasSolosEdicao},
+  uFrmObrasFuros in 'uFrmObrasFuros.pas' {FrmObrasFuros},
+  uFrmObrasFurosEdicao in 'uFrmObrasFurosEdicao.pas' {FrmObrasFurosEdicao};
 
 {$R *.res}
 
@@ -29,5 +33,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TFrmConexao, FrmConexao);
+  Application.CreateForm(TFrmObrasFuros, FrmObrasFuros);
+  Application.CreateForm(TFrmObrasFurosEdicao, FrmObrasFurosEdicao);
   Application.Run;
 end.
