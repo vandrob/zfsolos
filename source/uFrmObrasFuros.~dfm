@@ -2,10 +2,12 @@ inherited FrmObrasFuros: TFrmObrasFuros
   Left = 562
   Top = 308
   Caption = 'FrmObrasFuros'
+  ClientHeight = 533
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited FrmPadrao: TsuiForm
+    Height = 533
     TitleBarSections = <
       item
         AutoSize = True
@@ -599,13 +601,13 @@ inherited FrmObrasFuros: TFrmObrasFuros
       end>
     inherited suiPanel1: TsuiPanel
       Top = 193
-      Height = 345
+      Height = 340
       inherited suiDBGrid1: TsuiDBGrid
-        Height = 259
+        Height = 254
         DataSource = DataModule1.dsLocal_ObrasFuros
       end
       inherited suiDBNavigator1: TsuiDBNavigator
-        Top = 284
+        Top = 279
         DataSource = DataModule1.dsLocal_ObrasFuros
         Hints.Strings = ()
       end

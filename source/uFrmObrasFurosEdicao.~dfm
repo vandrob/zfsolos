@@ -1,18 +1,21 @@
 inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
-  Left = 426
-  Top = 183
-  Caption = 'FrmObrasFurosEdicao'
-  ClientHeight = 677
-  ClientWidth = 738
+  Left = 556
+  Top = 213
+  Width = 1133
+  Height = 752
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSizeable
   OldCreateOrder = True
+  WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   inherited suiForm1: TsuiForm
-    Width = 738
-    Height = 677
+    Width = 1127
+    Height = 747
     TitleBarSections = <
       item
         AutoSize = True
@@ -605,50 +608,54 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
         CapSec = False
       end>
     inherited suiPanel2: TsuiPanel
-      Top = 589
-      Width = 738
+      Top = 659
+      Width = 1127
       inherited btnSalvar: TsuiButton
+        Left = 416
         OnClick = btnSalvarClick
       end
+      inherited btnCancelar: TsuiButton
+        Left = 560
+      end
       inherited btnExcluir: TsuiButton
-        Left = 192
+        Left = 408
         OnClick = btnExcluirClick
       end
     end
     inherited suiPanel1: TsuiPanel
-      Width = 738
-      Height = 559
+      Width = 1127
+      Height = 629
       object GroupBox1: TGroupBox
         Left = 4
         Top = 25
-        Width = 730
+        Width = 1119
         Height = 160
         Align = alTop
         Caption = 'Dados do Furo'
         TabOrder = 0
         object lbl1: TLabel
           Left = 16
-          Top = 96
+          Top = 128
           Width = 100
           Height = 13
           Caption = 'Identificador do Furo:'
         end
         object Label1: TLabel
-          Left = 296
-          Top = 96
+          Left = 24
+          Top = 87
           Width = 45
           Height = 13
           Caption = 'Di'#226'metro:'
         end
         object Label2: TLabel
-          Left = 16
+          Left = 352
           Top = 128
           Width = 94
           Height = 13
           Caption = 'Cota de Sondagem:'
         end
         object Label3: TLabel
-          Left = 296
+          Left = 544
           Top = 128
           Width = 102
           Height = 13
@@ -718,15 +725,31 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ParentFont = False
           Visible = False
         end
+        object txtTIPOESTACA: TDBText
+          Left = 128
+          Top = 106
+          Width = 593
+          Height = 17
+          Color = clSilver
+          DataField = 'nome'
+          DataSource = DataModule1.dsDiametros
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
         object cmbDiametro: TsuiDBLookupComboBox
-          Left = 400
-          Top = 92
-          Width = 281
+          Left = 128
+          Top = 83
+          Width = 593
           Height = 21
           KeyField = 'id'
           ListField = 'diametro;nome'
           ListSource = DataModule1.dsDiametros
-          TabOrder = 1
+          TabOrder = 0
           OnKeyPress = txtNomeFuroKeyPress
           UIStyle = BlueGlass
           BorderColor = clBlack
@@ -734,7 +757,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ButtonColor = 15198183
         end
         object txtCotaSondagem: TsuiNumberEdit
-          Left = 127
+          Left = 463
           Top = 125
           Width = 68
           Height = 28
@@ -748,13 +771,14 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ParentFont = False
           TabOrder = 2
           Text = '0,00'
+          OnEnter = txtCotaSondagemEnter
           OnKeyPress = txtNomeFuroKeyPress
           Mask = '0.00'
           AutoSelectSigns = 2
           BorderStyle = bsNone
         end
         object txtCotaArrasamento: TsuiNumberEdit
-          Left = 401
+          Left = 649
           Top = 125
           Width = 68
           Height = 28
@@ -768,21 +792,21 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ParentFont = False
           TabOrder = 3
           Text = '0,00'
-          OnKeyPress = txtNomeFuroKeyPress
+          OnKeyPress = txtCotaArrasamentoKeyPress
           Mask = '0.00'
           AutoSelectSigns = 2
           BorderStyle = bsNone
         end
         object txtNomeFuro: TsuiEdit
           Left = 128
-          Top = 94
+          Top = 126
           Width = 153
           Height = 27
           UIStyle = BlueGlass
           BorderColor = clBlack
           CharCase = ecUpperCase
-          TabOrder = 0
-          Visible = False
+          TabOrder = 1
+          OnEnter = txtNomeFuroEnter
           OnKeyPress = txtNomeFuroKeyPress
         end
         object txtID: TsuiEdit
@@ -795,6 +819,510 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           CharCase = ecUpperCase
           TabOrder = 4
           Visible = False
+          OnChange = txtIDChange
+        end
+      end
+      object pnCamadas: TPanel
+        Left = 4
+        Top = 185
+        Width = 1119
+        Height = 440
+        Align = alClient
+        TabOrder = 1
+        Visible = False
+        object tbc1: TTabControl
+          Left = 241
+          Top = 1
+          Width = 40
+          Height = 438
+          Align = alLeft
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MultiLine = True
+          ParentFont = False
+          TabOrder = 0
+          TabPosition = tpLeft
+          Tabs.Strings = (
+            'Camadas de Solo')
+          TabIndex = 0
+        end
+        object sideNSPT: TsuiSideChannel
+          Left = 41
+          Top = 1
+          Width = 200
+          Height = 438
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          CaptionFontColor = clWhite
+          ShowButton = True
+          SideBarColor = 15198183
+          Caption = 'NSpt obtidos na sondagem'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Align = suiLeft
+          StayOn = True
+          Color = clWhite
+          ParentFont = False
+          PopupMode = suiMouseOn
+          QuickMove = False
+          SideBarWidth = 10
+          object navNSPT: TsuiDBNavigator
+            Left = 13
+            Top = 405
+            Width = 184
+            Height = 30
+            Cursor = crDefault
+            UIStyle = BlueGlass
+            DataSource = DataModule1.dsFuros_NSPT
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost]
+            Align = alBottom
+            TabOrder = 0
+          end
+          object gridNSPT: TsuiDBGrid
+            Left = 13
+            Top = 24
+            Width = 184
+            Height = 381
+            Align = alClient
+            BorderStyle = bsNone
+            Color = 15198183
+            DataSource = DataModule1.dsFuros_NSPT
+            FixedColor = 15490654
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -13
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWhite
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnKeyDown = gridNSPTKeyDown
+            UIStyle = BlueGlass
+            BorderColor = clBlack
+            FocusedColor = clGreen
+            SelectedColor = clYellow
+            FontColor = clBlack
+            TitleFontColor = clWhite
+            FixedBGColor = 15490654
+            BGColor = 15198183
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'id'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'idfuro'
+                Visible = False
+              end
+              item
+                Color = 15490654
+                Expanded = False
+                FieldName = 'idcamada'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = [fsBold]
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWhite
+                Title.Font.Height = -16
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 62
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'nspt'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = [fsBold]
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWhite
+                Title.Font.Height = -16
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 69
+                Visible = True
+              end>
+          end
+        end
+        object TabControl1: TTabControl
+          Left = 1
+          Top = 1
+          Width = 40
+          Height = 438
+          Align = alLeft
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          MultiLine = True
+          ParentFont = False
+          TabOrder = 2
+          TabPosition = tpLeft
+          Tabs.Strings = (
+            'NSpt')
+          TabIndex = 0
+        end
+        object suiSideChannel1: TsuiSideChannel
+          Left = 281
+          Top = 1
+          Width = 392
+          Height = 438
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          CaptionFontColor = clWhite
+          ShowButton = True
+          SideBarColor = 15198183
+          Caption = 'Camadas'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Align = suiLeft
+          StayOn = True
+          Color = clWhite
+          ParentFont = False
+          PopupMode = suiMouseOn
+          QuickMove = False
+          SideBarWidth = 10
+          object suiDBNavigator1: TsuiDBNavigator
+            Left = 13
+            Top = 405
+            Width = 376
+            Height = 30
+            Cursor = crDefault
+            UIStyle = BlueGlass
+            DataSource = DataModule1.dsCamadas
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost]
+            Align = alBottom
+            TabOrder = 0
+          end
+          object gridCamadas: TsuiDBGrid
+            Left = 13
+            Top = 24
+            Width = 376
+            Height = 381
+            Align = alClient
+            BorderStyle = bsNone
+            Color = 15198183
+            DataSource = DataModule1.dsCamadas
+            FixedColor = 15490654
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -13
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWhite
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnKeyDown = gridCamadasKeyDown
+            UIStyle = BlueGlass
+            BorderColor = clBlack
+            FocusedColor = clGreen
+            SelectedColor = clYellow
+            FontColor = clBlack
+            TitleFontColor = clWhite
+            FixedBGColor = 15490654
+            BGColor = 15198183
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'idcamada'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'idfuro'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'idsolo'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'camada'
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWhite
+                Title.Font.Height = -13
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 60
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Profundidade'
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWhite
+                Title.Font.Height = -13
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 90
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Solo'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -9
+                Font.Name = 'MS Sans Serif'
+                Font.Style = [fsBold]
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWhite
+                Title.Font.Height = -13
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 205
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'spt'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_k'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_alpha'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_rp'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_r1'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_beta'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'vlr_r2'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'qm_adm1'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'qm_adm2'
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'qm_adm'
+                Visible = False
+              end>
+          end
+        end
+        object suiPanel3: TsuiPanel
+          Left = 673
+          Top = 1
+          Width = 445
+          Height = 438
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          Caption = 'M'#233'todos de C'#225'lculos'
+          ShowButton = True
+          CaptionFontColor = clWhite
+          Align = alClient
+          TabOrder = 4
+          Color = clWhite
+          object suiTabControl1: TsuiTabControl
+            Left = 4
+            Top = 25
+            Width = 437
+            Height = 409
+            Align = alClient
+            UIStyle = BlueGlass
+            LeftMargin = 10
+            BorderColor = clBlack
+            Color = 15198183
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            TabPosition = suiTop
+            PageDrawFocused = True
+            TabOrder = 0
+            Tabs.Strings = (
+              'Decourt'
+              'Aoki'
+              'Veloso')
+            TabIndex = 0
+            object suiDBGrid1: TsuiDBGrid
+              Left = 3
+              Top = 25
+              Width = 431
+              Height = 381
+              Align = alClient
+              BorderStyle = bsNone
+              Color = 15198183
+              DataSource = DataModule1.dsCalculosDecourt
+              FixedColor = 15490654
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -13
+              Font.Name = 'MS Sans Serif'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWhite
+              TitleFont.Height = -11
+              TitleFont.Name = 'MS Sans Serif'
+              TitleFont.Style = []
+              OnKeyDown = gridCamadasKeyDown
+              UIStyle = BlueGlass
+              BorderColor = clBlack
+              FocusedColor = clGreen
+              SelectedColor = clYellow
+              FontColor = clBlack
+              TitleFontColor = clWhite
+              FixedBGColor = 15490654
+              BGColor = 15198183
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'idcamada'
+                  Visible = False
+                end
+                item
+                  Expanded = False
+                  FieldName = 'idfuro'
+                  Visible = False
+                end
+                item
+                  Expanded = False
+                  FieldName = 'idsolo'
+                  Visible = False
+                end
+                item
+                  Expanded = False
+                  FieldName = 'profundidade'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'solo'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = [fsBold]
+                  Width = 200
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'camada'
+                  Visible = False
+                end
+                item
+                  Expanded = False
+                  FieldName = 'spt'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_k'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_alpha'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_r1'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_rp'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_beta'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'vlr_r2'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'qm_adm1'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'qm_adm2'
+                  Width = 45
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'qm_adm'
+                  Width = 45
+                  Visible = True
+                end>
+            end
+          end
         end
       end
     end

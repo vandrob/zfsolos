@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ZFCALC"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.0.4"
 #define MyAppPublisher "ZFSolos"
 #define MyAppURL "www.zfsolos.com.br"
 #define MyAppExeName "ZFCalc.exe"

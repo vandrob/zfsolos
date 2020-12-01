@@ -3,9 +3,10 @@ unit uFrmObrasFurosEdicao;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,DB,
   Dialogs, uFrmPadraoEdicao, SUIButton, SUIImagePanel, ExtCtrls, SUIForm,
-  StdCtrls, SUIEdit, DBCtrls, SUIDBCtrls;
+  StdCtrls, SUIEdit, DBCtrls, SUIDBCtrls, Grids, DBGrids, SUISideChannel,
+  ComCtrls, SUITabControl;
 
 type
   TFrmObrasFurosEdicao = class(TFrmPadraoEdicao)
@@ -24,6 +25,18 @@ type
     txtOPERACAO: TLabel;
     txtID: TsuiEdit;
     txtTIPOESTACA: TDBText;
+    pnCamadas: TPanel;
+    tbc1: TTabControl;
+    sideNSPT: TsuiSideChannel;
+    navNSPT: TsuiDBNavigator;
+    gridNSPT: TsuiDBGrid;
+    TabControl1: TTabControl;
+    suiSideChannel1: TsuiSideChannel;
+    suiDBNavigator1: TsuiDBNavigator;
+    gridCamadas: TsuiDBGrid;
+    suiPanel3: TsuiPanel;
+    suiTabControl1: TsuiTabControl;
+    suiDBGrid1: TsuiDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure txtNomeFuroKeyPress(Sender: TObject; var Key: Char);
@@ -33,6 +46,15 @@ type
     procedure txtCotaSondagemEnter(Sender: TObject);
     procedure txtNomeFuroEnter(Sender: TObject);
     procedure txtCotaArrasamentoKeyPress(Sender: TObject; var Key: Char);
+    procedure txtIDChange(Sender: TObject);
+    procedure GradeCamadasKeyPress(Sender: TObject; var Key: Char);
+    procedure GradeCamadasKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure gridNSPTKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure gridCamadasKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -140,7 +162,7 @@ end;
 
 procedure TFrmObrasFurosEdicao.btnSalvarClick(Sender: TObject);
 var
- strSQL,strOperacao:string;
+ strSQL,strOperacao,strNewID:string;
 begin
 
   inherited;
@@ -159,7 +181,7 @@ begin
             ' cota_sondagem, '+
             ' cota_arrasamento '+
             ' ) VALUES ( '+
-            aspas(  VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ))+','+
+            aspas( VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ))+','+
             aspas( VirgulaParaPonto(cmbDiametro.KeyValue )) +','+
             aspas( txtNomeFuro.Text )+','+
             aspas( VirgulaParaPonto(txtCotaSondagem.Text) ) +','+
@@ -178,11 +200,24 @@ begin
    end
   ;
 
-
-
   executarSQL( strSQL );
   uDatamodule.DataModule1.QryLocal_ObrasFuros.Refresh;
-  close;
+
+   if (strOperacao='I') then begin
+      strOperacao:='A';
+      strSQL:='SELECT COALESCE(MAX(id),0)+1 AS ID FROM zf_furos WHERE idobra='+uDatamodule.DataModule1.qryLocal_Obrasid.AsString;
+      strNewID:=retornarValor(strSQL);
+      with uDatamodule.DataModule1.QryLocal_ObrasFuros do begin
+       First;
+       Locate( 'id', strSQL,[]);
+      end;
+      carregarCampos( strOperacao );
+      pnCamadas.Visible:=true;
+   end else begin
+    close;
+   end;
+
+
 
 end;
 
@@ -205,6 +240,162 @@ begin
   if Key=#13 then begin
     if btnSalvar.Visible then btnSalvar.SetFocus else btnExcluir.SetFocus;
   end;
+end;
+
+procedure TFrmObrasFurosEdicao.txtIDChange(Sender: TObject);
+var
+   wid:string;
+begin
+  inherited;
+  wid:=TrimRight(TrimLeft(DataModule1.QryLocal_ObrasFurosid.AsString));
+  if wid<>'' then begin
+    with uDatamodule.DataModule1.qryFuros_NSPT do begin
+      Close;
+      ParamByName('parIDFURO').Value:=wid;
+      Open;
+    end;
+    with uDatamodule.DataModule1.qryCamadas do begin
+      Close;
+      ParamByName('parIDFURO').Value:=wid;
+      Open;
+    end;
+    with uDatamodule.DataModule1.qryCalculosDecourt do begin
+      Close;
+      ParamByName('parIDFURO').Value:=wid;
+      Open;
+    end;
+
+  end;
+
+
+end;
+
+procedure TFrmObrasFurosEdicao.GradeCamadasKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if Key=#13 then begin
+  
+  end;
+end;
+
+procedure TFrmObrasFurosEdicao.GradeCamadasKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  Column: Integer;
+begin
+  inherited;
+  if Key = VK_RETURN then
+  begin
+    Column := (Sender as TDBGrid).SelectedIndex;
+    if Column < 0 then
+      Column := 0;
+    if ssShift in Shift then
+      Dec(Column)
+    else
+      Inc(Column);
+    if Column < 0 then
+    begin
+
+      Column := (Sender as TDBGrid).Columns.Count - 1;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.BOF then
+        (Sender as TDBGrid).DataSource.DataSet.Prior;
+    end
+    else
+    if Column >= (Sender as TDBGrid).Columns.Count then
+    begin
+      Column := 0;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.EOF then
+        (Sender as TDBGrid).DataSource.DataSet.Next
+      else
+        (Sender as TDBGrid).DataSource.DataSet.Append;
+    end;
+    (Sender as TDBGrid).SelectedIndex := Column;
+    Key := 0;
+  end;
+end;
+
+procedure TFrmObrasFurosEdicao.gridNSPTKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  Column: Integer;
+begin
+  if Key = VK_RETURN then
+  begin
+    Column := (Sender as TDBGrid).SelectedIndex;
+    if Column <= 0 then
+      Column := 3;
+    if ssShift in Shift then
+      Dec(Column)
+    else
+      Inc(Column);
+    if Column <= 0 then
+    begin
+      //Column := (Sender as TDBGrid).Columns.Count - 1;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.BOF then
+        (Sender as TDBGrid).DataSource.DataSet.Prior;
+    end
+    else
+    if Column >= (Sender as TDBGrid).Columns.Count then
+    begin
+      Column := 3;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.EOF then
+        (Sender as TDBGrid).DataSource.DataSet.Next
+      else
+        (Sender as TDBGrid).DataSource.DataSet.Append;
+    end;
+    (Sender as TDBGrid).SelectedIndex := 3;
+    Key := 0;
+  end;
+end;
+
+
+procedure TFrmObrasFurosEdicao.gridCamadasKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  Column: Integer;
+begin
+  if Key = VK_RETURN then
+  begin
+    Column := (Sender as TDBGrid).SelectedIndex;
+    if Column <= 0 then
+      Column := 5;
+    if ssShift in Shift then
+      Dec(Column)
+    else
+      Inc(Column);
+    if Column <= 0 then
+    begin
+      //Column := (Sender as TDBGrid).Columns.Count - 1;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.BOF then
+        (Sender as TDBGrid).DataSource.DataSet.Prior;
+    end
+    else
+    if Column >= (Sender as TDBGrid).Columns.Count then
+    begin
+      Column := 5;
+      if ((Sender as TDBGrid).DataSource.State = dsBrowse) and
+        not (Sender as TDBGrid).DataSource.DataSet.EOF then
+        (Sender as TDBGrid).DataSource.DataSet.Next
+      else
+        (Sender as TDBGrid).DataSource.DataSet.Append;
+    end;
+    (Sender as TDBGrid).SelectedIndex := 5;
+    Key := 0;
+  end;
+
+end;
+
+procedure TFrmObrasFurosEdicao.FormShow(Sender: TObject);
+begin
+  inherited;
+  pnCamadas.Visible:= copy(txtOPERACAO.caption,0,1)<>'I';
+
 end;
 
 end.

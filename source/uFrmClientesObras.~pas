@@ -87,6 +87,8 @@ if not assigned(FrmClientesObrasEdicao) then
 end;
 
 procedure TFrmClientesObras.btFurosClick(Sender: TObject);
+var
+ idObra:string;
 begin
   inherited;
   if not assigned(FrmObrasFuros) Then FrmObrasfuros.create(application);
@@ -94,9 +96,16 @@ begin
      showmessage('insira a obra e depois clique para seleciona-la');
      exit;
   end;
-  FrmObrasFuros.txtID.Caption:= uDatamodule.DataModule1.qryLocal_Obrasid.AsString;
+  idObra:=uDatamodule.DataModule1.qryLocal_Obrasid.AsString;
+  FrmObrasFuros.txtID.Caption:= idObra;
   FrmObrasFuros.txtObra.Caption:=uDatamodule.DataModule1.qryLocal_Obrasnome.AsString;
   FrmObrasFuros.txtCliente.Caption:=uDataModule.DataModule1.qrylocal_clientesnome.AsString;
+
+  Datamodule1.QryLocal_ObrasFuros.Close;
+  Datamodule1.QryLocal_ObrasFuros.ParamByName('parID').Value:=idObra;
+  Datamodule1.QryLocal_ObrasFuros.Open;
+
+
   frmObrasFuros.showmodal;
 end;
 

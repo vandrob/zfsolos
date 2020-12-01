@@ -91,7 +91,7 @@ var
  idObra:string;
 begin
   inherited;
-  if not assigned(FrmObrasFuros) Then FrmObrasfuros.create(application);
+  if not assigned(FrmObrasFuros) Then FrmObrasfuros:=TFrmObrasfuros.create(application);
   if udatamodule.DataModule1.qryLocal_Obras.eof then begin
      showmessage('insira a obra e depois clique para seleciona-la');
      exit;

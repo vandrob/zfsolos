@@ -1,7 +1,7 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 923
-  Top = 229
+  Left = 227
+  Top = 182
   Height = 739
   Width = 541
   object connSQLITE: TZConnection
@@ -633,8 +633,8 @@ object DataModule1: TDataModule1
       'ORDER BY'#10
       '  t.nome,d.diametro ')
     Params = <>
-    Left = 320
-    Top = 576
+    Left = 400
+    Top = 376
     object qryDiametrosid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -663,5 +663,351 @@ object DataModule1: TDataModule1
     DataSet = qryDiametros
     Left = 440
     Top = 576
+  end
+  object qryCamadas: TZQuery
+    Connection = connMYSQL
+    AfterInsert = qryCamadasAfterInsert
+    AfterPost = qryCamadasAfterPost
+    SQL.Strings = (
+      'SELECT '
+      '    '#10'idcamada,'#10
+      '    idfuro,'
+      '    idsolo,'
+      '    '#10'profundidade,'
+      '   '#10'camada,'
+      '   '#10'spt,'
+      '   '#10'vlr_k,'
+      '   '#10'vlr_alpha,'
+      '    '#10'vlr_rp,'#10
+      '    vlr_r1,'
+      '    '#10'vlr_beta,'
+      '    '#10'vlr_r2,'
+      '    '#10'qm_adm1,'
+      '    '#10'qm_adm2,'#10
+      '    qm_adm'#10
+      'FROM '#10
+      '   zf_furos_camadas'
+      'WHERE '
+      '  idfuro=:parIDFURO'
+      'ORDER BY'
+      '  idfuro,profundidade,camada')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFURO'
+        ParamType = ptUnknown
+      end>
+    Left = 72
+    Top = 640
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFURO'
+        ParamType = ptUnknown
+      end>
+    object qryCamadasidcamada: TIntegerField
+      FieldName = 'idcamada'
+      Required = True
+      Visible = False
+    end
+    object qryCamadasidfuro: TIntegerField
+      FieldName = 'idfuro'
+      Required = True
+      Visible = False
+    end
+    object qryCamadasidsolo: TIntegerField
+      FieldName = 'idsolo'
+      Required = True
+      Visible = False
+      OnChange = qryCamadasidsoloChange
+    end
+    object qryCamadasprofundidade: TFloatField
+      FieldName = 'Profundidade'
+      Required = True
+      DisplayFormat = '###0.00'
+      EditFormat = '###0.00'
+    end
+    object qryCamadascamada: TIntegerField
+      DisplayLabel = 'Camada'
+      FieldName = 'camada'
+      Required = True
+      DisplayFormat = '###0'
+      EditFormat = '###0'
+    end
+    object qryCamadasSolo: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Solo'
+      LookupDataSet = qryLocal_Solos
+      LookupKeyFields = 'id'
+      LookupResultField = 'nome'
+      KeyFields = 'idsolo'
+      Size = 50
+      Lookup = True
+    end
+    object qryCamadasspt: TFloatField
+      DisplayLabel = 'SPT'
+      FieldName = 'spt'
+      Required = True
+      DisplayFormat = '###0'
+      EditFormat = '###0'
+    end
+    object qryCamadasvlr_k: TFloatField
+      DisplayLabel = 'K'
+      FieldName = 'vlr_k'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasvlr_alpha: TFloatField
+      DisplayLabel = 'Alpha'
+      FieldName = 'vlr_alpha'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasvlr_rp: TFloatField
+      DisplayLabel = 'RP'
+      FieldName = 'vlr_rp'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasvlr_r1: TFloatField
+      DisplayLabel = 'R1'
+      FieldName = 'vlr_r1'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasvlr_beta: TFloatField
+      DisplayLabel = 'Beta'
+      FieldName = 'vlr_beta'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasvlr_r2: TFloatField
+      DisplayLabel = 'R2'
+      FieldName = 'vlr_r2'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasqm_adm1: TFloatField
+      DisplayLabel = 'QM Adm1'
+      FieldName = 'qm_adm1'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasqm_adm2: TFloatField
+      DisplayLabel = 'QM Adm2'
+      FieldName = 'qm_adm2'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+    object qryCamadasqm_adm: TFloatField
+      DisplayLabel = 'QM Adm'
+      FieldName = 'qm_adm'
+      Required = True
+      DisplayFormat = '#####0.00'
+      EditFormat = '#####0.00'
+    end
+  end
+  object qryFuros_NSPT: TZQuery
+    Connection = connMYSQL
+    AfterInsert = qryFuros_NSPTAfterInsert
+    AfterPost = qryFuros_NSPTAfterPost
+    SQL.Strings = (
+      
+        'SELECT * FROM estaqnet_erp1.zf_furos_nspt where idfuro=:parIDFUR' +
+        'O ORDER BY idfuro,idcamada ')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFuro'
+        ParamType = ptUnknown
+      end>
+    Left = 176
+    Top = 640
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFuro'
+        ParamType = ptUnknown
+      end>
+    object qryFuros_NSPTid: TIntegerField
+      FieldName = 'id'
+      Required = True
+      Visible = False
+    end
+    object qryFuros_NSPTidfuro: TIntegerField
+      FieldName = 'idfuro'
+      Required = True
+      Visible = False
+    end
+    object qryFuros_NSPTidcamada: TIntegerField
+      DisplayLabel = 'Camada'
+      FieldName = 'idcamada'
+      Required = True
+    end
+    object qryFuros_NSPTnspt: TFloatField
+      DisplayLabel = 'N Spt'
+      FieldName = 'nspt'
+      Required = True
+      DisplayFormat = '#####0'
+      EditFormat = '#####0'
+    end
+  end
+  object dsFuros_NSPT: TDataSource
+    DataSet = qryFuros_NSPT
+    Left = 400
+    Top = 632
+  end
+  object dsCamadas: TDataSource
+    DataSet = qryCamadas
+    Left = 368
+    Top = 520
+  end
+  object qryCalculosDecourt: TZQuery
+    Connection = connMYSQL
+    SQL.Strings = (
+      'SELECT'
+      #9'c.idcamada,'
+      #9'c.idfuro,'
+      #9'c.idsolo,'
+      '  s.nome as solo,'
+      #9'c.profundidade,'
+      #9'c.camada,'
+      #9'c.spt,'
+      #9'c.vlr_k,'
+      #9'c.vlr_alpha,'
+      #9'c.vlr_rp,'
+      #9'c.vlr_r1,'
+      #9'c.vlr_beta,'
+      #9'c.vlr_r2,'
+      #9'c.qm_adm1,'
+      #9'c.qm_adm2,'
+      #9'c.qm_adm'
+      'FROM'
+      #9'  zf_furos_camadas c'
+      '    inner join zf_solos s on s.id=c.idsolo'
+      'WHERE'
+      '    c.idfuro=:parIDFURO'
+      'ORDER by'
+      '    c.idfuro,c.profundidade ')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFURO'
+        ParamType = ptUnknown
+      end>
+    Left = 288
+    Top = 632
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'parIDFURO'
+        ParamType = ptUnknown
+      end>
+    object qryCalculosDecourtidcamada: TIntegerField
+      FieldName = 'idcamada'
+      Required = True
+      Visible = False
+    end
+    object qryCalculosDecourtidfuro: TIntegerField
+      FieldName = 'idfuro'
+      Required = True
+      Visible = False
+    end
+    object qryCalculosDecourtidsolo: TIntegerField
+      FieldName = 'idsolo'
+      Required = True
+      Visible = False
+    end
+    object qryCalculosDecourtsolo: TStringField
+      DisplayLabel = 'Solo'
+      FieldName = 'solo'
+      Size = 45
+    end
+    object qryCalculosDecourtprofundidade: TFloatField
+      DisplayLabel = 'Profundidade'
+      FieldName = 'profundidade'
+      Required = True
+      DisplayFormat = '####0.00'
+      EditFormat = '####0.00'
+    end
+    object qryCalculosDecourtcamada: TIntegerField
+      DisplayLabel = 'Camada'
+      FieldName = 'camada'
+      Required = True
+    end
+    object qryCalculosDecourtspt: TFloatField
+      DisplayLabel = 'NSpt'
+      FieldName = 'spt'
+      Required = True
+      DisplayFormat = '####0'
+      EditFormat = '####0'
+    end
+    object qryCalculosDecourtvlr_k: TFloatField
+      DisplayLabel = 'K'
+      FieldName = 'vlr_k'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtvlr_alpha: TFloatField
+      DisplayLabel = 'Alpha'
+      FieldName = 'vlr_alpha'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtvlr_r1: TFloatField
+      DisplayLabel = 'Rl'
+      FieldName = 'vlr_r1'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtvlr_rp: TFloatField
+      DisplayLabel = 'Rp'
+      FieldName = 'vlr_rp'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtvlr_beta: TFloatField
+      DisplayLabel = 'Beta'
+      FieldName = 'vlr_beta'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtvlr_r2: TFloatField
+      DisplayLabel = 'Rt'
+      FieldName = 'vlr_r2'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtqm_adm1: TFloatField
+      DisplayLabel = 'QM Adm1'
+      FieldName = 'qm_adm1'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtqm_adm2: TFloatField
+      DisplayLabel = 'QM Adm2'
+      FieldName = 'qm_adm2'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+    object qryCalculosDecourtqm_adm: TFloatField
+      DisplayLabel = 'QM Adm'
+      FieldName = 'qm_adm'
+      Required = True
+      DisplayFormat = '####0.00'
+    end
+  end
+  object dsCalculosDecourt: TDataSource
+    DataSet = qryCalculosDecourt
+    Left = 400
+    Top = 632
   end
 end

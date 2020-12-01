@@ -14,6 +14,7 @@ uses
  function campoPreenchido(vlrConteudo:Variant; strMensagem:string='Este campo é de preenchimento obrigatório'):boolean;
  function login:boolean;
  function retornarCampo(strTabela,strCampo,strWhere,strOrderByFields:string):string;
+ function retornarValor(strSQL:string):string;
  Function  VirgulaParaPonto(s:string):string; 
 
 var
@@ -32,6 +33,19 @@ var
  strSQL:String;
 begin
  strSQL:='SELECT '+strCampo+' FROM '+strTabela+' '+strWHERE+' ORDER BY '+strOrderByFields;
+ with datamodule1.qryLocal_Retorno do begin
+   close;
+   sql.clear;
+   sql.add(strSQL);
+   open;
+   result:=trimright(trimleft( Fields[0].AsString ));
+   close;
+ end;
+end;
+
+
+function retornarValor(strSQL:string):string;
+begin
  with datamodule1.qryLocal_Retorno do begin
    close;
    sql.clear;

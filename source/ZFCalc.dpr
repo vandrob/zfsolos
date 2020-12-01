@@ -33,7 +33,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TDataModule1, DataModule1);
   Application.CreateForm(TFrmConexao, FrmConexao);
-  Application.CreateForm(TFrmObrasFuros, FrmObrasFuros);
-  Application.CreateForm(TFrmObrasFurosEdicao, FrmObrasFurosEdicao);
   Application.Run;
 end.

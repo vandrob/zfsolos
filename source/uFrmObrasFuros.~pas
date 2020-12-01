@@ -30,12 +30,40 @@ var
 implementation
 
 {$R *.dfm}
-uses uDatamodule,uFuncoes;
+uses uDatamodule,uFuncoes, uFrmObrasFurosEdicao;
 
 procedure TFrmObrasFuros.btnIncluirClick(Sender: TObject);
+var
+   strSQL:string;
+   sLastID:string;
 begin
   inherited;
-  chamarTelaEdicao('I')
+  //chamarTelaEdicao('I');
+     strSQL:='INSERT INTO zf_furos ('+
+            ' idobra ,    '+
+            ' iddiametro,    '+
+            ' descricaofuro,    '+
+            ' cota_sondagem, '+
+            ' cota_arrasamento '+
+            ' ) VALUES ( '+
+            aspas( VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ))+','+
+            aspas( '0') +','+
+            aspas( '' ) +','+
+            aspas( '0.00' ) +','+
+            aspas( '0.00')+' )';
+
+  executarSQL( strSQL );
+  uDatamodule.DataModule1.QryLocal_ObrasFuros.Refresh;
+
+  strSQL  :='SELECT COALESCE(MAX(id),0)+1) AS ID FROM zf_furos WHERE idobra='+aspas( VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ));
+  sLastID :=retornarValor( strSQL );
+  with DataModule1.QryLocal_ObrasFuros do begin
+   first;
+   locate('id', sLastID, []);
+   chamarTelaEdicao('A');
+  end;
+
+
 end;
 
 procedure TFrmObrasFuros.btnAlterarClick(Sender: TObject);
@@ -53,21 +81,23 @@ end;
 procedure TFrmObrasFuros.chamarTelaEdicao(strOpcao: string);
 begin
  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
-if strOpcao<>'I' then begin
- if datamodule1.qrylocal_clientes.RecordCount = 0 then
-  begin
+ if strOpcao<>'I' then begin
+  if datamodule1.qrylocal_clientes.RecordCount = 0 then
+   begin
       myMSG( 'Tabela Vazia! ','Opção não disponível',2);
       exit;
-  end
+   end;
+ end;
 
-  
  timer1.Enabled:=false;
- if not assigned(FrmObrasFurosEdicao) then
-                 FrmObrasFurosEdicao:=TFrmObrasFurosEdicao.Create(Application);
-                 FrmObrasFurosEdicao.FrmObrasFurosEdicao.carregarCampos(strOpcao);
+
+ if not assigned(FrmObrasFurosEdicao) then  FrmObrasFurosEdicao:=TFrmObrasFurosEdicao.Create(Application);
+                 uFrmObrasFurosEdicao.FrmObrasFurosEdicao.carregarCampos(strOpcao);
                  FrmObrasFurosEdicao.ShowModal;
                   FreeAndNil(FrmObrasFurosEdicao);
-t imer1.Enabled:=true;
+
+
+ timer1.Enabled:=true;
 
 end;
 

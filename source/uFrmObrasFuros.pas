@@ -34,8 +34,8 @@ uses uDatamodule,uFuncoes, uFrmObrasFurosEdicao;
 
 procedure TFrmObrasFuros.btnIncluirClick(Sender: TObject);
 begin
-  inherited;
-  chamarTelaEdicao('I')
+   inherited;
+   chamarTelaEdicao('I');
 end;
 
 procedure TFrmObrasFuros.btnAlterarClick(Sender: TObject);
@@ -62,11 +62,14 @@ begin
  end;
 
  timer1.Enabled:=false;
+
  if not assigned(FrmObrasFurosEdicao) then  FrmObrasFurosEdicao:=TFrmObrasFurosEdicao.Create(Application);
                  uFrmObrasFurosEdicao.FrmObrasFurosEdicao.carregarCampos(strOpcao);
                  FrmObrasFurosEdicao.ShowModal;
                   FreeAndNil(FrmObrasFurosEdicao);
-  timer1.Enabled:=true;
+
+
+ timer1.Enabled:=true;
 
 end;
 

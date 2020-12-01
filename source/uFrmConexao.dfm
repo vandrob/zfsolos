@@ -2,7 +2,7 @@ object FrmConexao: TFrmConexao
   Left = 449
   Top = 177
   BorderStyle = bsNone
-  Caption = 'FrmConexao'
+  Caption = 'y'
   ClientHeight = 452
   ClientWidth = 717
   Color = 8454143
