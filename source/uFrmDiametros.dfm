@@ -737,7 +737,7 @@ inherited FrmDiametros: TFrmDiametros
         Height = 47
       end
       object idtipo: TEdit
-        Left = 464
+        Left = 416
         Top = 40
         Width = 121
         Height = 21

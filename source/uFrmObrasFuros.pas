@@ -54,7 +54,7 @@ procedure TFrmObrasFuros.chamarTelaEdicao(strOpcao: string);
 begin
  //chamar a tela de edição como a opção (I)ncluir, (A)lterar ou (E)xcluir
  if strOpcao<>'I' then begin
-  if datamodule1.qrylocal_clientes.RecordCount = 0 then
+  if datamodule1.QryLocal_ObrasFuros.RecordCount = 0 then
    begin
       myMSG( 'Tabela Vazia! ','Opção não disponível',2);
       exit;

@@ -95,12 +95,6 @@ type
     QryLocal_ObrasFurosdescricaofuro: TStringField;
     QryLocal_ObrasFuroscota_sondagem: TFloatField;
     QryLocal_ObrasFuroscota_arrasamento: TFloatField;
-    qryDiametros: TZQuery;
-    dsDiametros: TDataSource;
-    qryDiametrosid: TIntegerField;
-    qryDiametrosnome: TStringField;
-    qryDiametrosdiametro: TFloatField;
-    qryDiametrosid_estacas_tipos: TIntegerField;
     qryCamadas: TZQuery;
     qryCamadasidcamada: TIntegerField;
     qryCamadasidfuro: TIntegerField;

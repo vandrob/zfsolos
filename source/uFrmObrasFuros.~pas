@@ -33,37 +33,9 @@ implementation
 uses uDatamodule,uFuncoes, uFrmObrasFurosEdicao;
 
 procedure TFrmObrasFuros.btnIncluirClick(Sender: TObject);
-var
-   strSQL:string;
-   sLastID:string;
 begin
-  inherited;
-  //chamarTelaEdicao('I');
-     strSQL:='INSERT INTO zf_furos ('+
-            ' idobra ,    '+
-            ' iddiametro,    '+
-            ' descricaofuro,    '+
-            ' cota_sondagem, '+
-            ' cota_arrasamento '+
-            ' ) VALUES ( '+
-            aspas( VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ))+','+
-            aspas( '0') +','+
-            aspas( '' ) +','+
-            aspas( '0.00' ) +','+
-            aspas( '0.00')+' )';
-
-  executarSQL( strSQL );
-  uDatamodule.DataModule1.QryLocal_ObrasFuros.Refresh;
-
-  strSQL  :='SELECT COALESCE(MAX(id),0)+1) AS ID FROM zf_furos WHERE idobra='+aspas( VirgulaParaPonto(uDatamodule.DataModule1.qryLocal_Obrasid.AsString ));
-  sLastID :=retornarValor( strSQL );
-  with DataModule1.QryLocal_ObrasFuros do begin
-   first;
-   locate('id', sLastID, []);
-   chamarTelaEdicao('A');
-  end;
-
-
+   inherited;
+   chamarTelaEdicao('I');
 end;
 
 procedure TFrmObrasFuros.btnAlterarClick(Sender: TObject);

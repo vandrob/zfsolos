@@ -6,14 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,DB,
   Dialogs, uFrmPadraoEdicao, SUIButton, SUIImagePanel, ExtCtrls, SUIForm,
   StdCtrls, SUIEdit, DBCtrls, SUIDBCtrls, Grids, DBGrids, SUISideChannel,
-  ComCtrls, SUITabControl;
+  ComCtrls, SUITabControl, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  Mask;
 
 type
   TFrmObrasFurosEdicao = class(TFrmPadraoEdicao)
     GroupBox1: TGroupBox;
     lbl1: TLabel;
     Label1: TLabel;
-    cmbDiametro: TsuiDBLookupComboBox;
     txtCotaSondagem: TsuiNumberEdit;
     txtCotaArrasamento: TsuiNumberEdit;
     txtNomeFuro: TsuiEdit;
@@ -24,7 +24,6 @@ type
     txtObraEndereco: TDBText;
     txtOPERACAO: TLabel;
     txtID: TsuiEdit;
-    txtTIPOESTACA: TDBText;
     pnCamadas: TPanel;
     tbc1: TTabControl;
     sideNSPT: TsuiSideChannel;
@@ -37,8 +36,32 @@ type
     suiPanel3: TsuiPanel;
     suiTabControl1: TsuiTabControl;
     suiDBGrid1: TsuiDBGrid;
-    procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    cmbEstaca: TsuiDBLookupComboBox;
+    dsEstacas: TDataSource;
+    qryEstacas: TZQuery;
+    qryDiametros: TZQuery;
+    qryEstacasid: TIntegerField;
+    qryEstacasnome: TStringField;
+    qryEstacasf1: TFloatField;
+    qryEstacasf2: TFloatField;
+    qryDiametrosid: TIntegerField;
+    qryDiametrosid_estacas_tipos: TIntegerField;
+    qryDiametrosdiametro: TFloatField;
+    qryDiametrossecao_1: TFloatField;
+    qryDiametrossecao_2: TFloatField;
+    qryDiametrosarea: TFloatField;
+    qryDiametrosperimetro: TFloatField;
+    qryDiametrosmetalica_bitola_letra: TStringField;
+    qryDiametrosmetalica_bitola_secao_1: TFloatField;
+    qryDiametrosmetalica_bitola_secao_2: TFloatField;
+    qryDiametrosmetalica_area_bruta: TFloatField;
+    qryDiametrosmetalica_perimetro: TFloatField;
+    qryDiametrosmetalica_area_plena: TFloatField;
+    cmbDiametro: TsuiDBLookupComboBox;
+    Label4: TLabel;
+    dsDiametros: TDataSource;
+    Label5: TLabel;
+    DBEdit1: TDBEdit;
     procedure txtNomeFuroKeyPress(Sender: TObject; var Key: Char);
     procedure FormActivate(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
@@ -55,6 +78,8 @@ type
     procedure gridCamadasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure dsEstacasDataChange(Sender: TObject; Field: TField);
+    procedure DBEdit1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,22 +95,9 @@ implementation
 {$R *.dfm}
 uses uDatamodule,uFuncoes;
 
-procedure TFrmObrasFurosEdicao.FormCreate(Sender: TObject);
-begin
-  inherited;
-  uDatamodule.DataModule1.qryDiametros.Open;
-end;
-
-procedure TFrmObrasFurosEdicao.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  inherited;
-  uDatamodule.DataModule1.qryDiametros.close;
-end;
-
 procedure TFrmObrasFurosEdicao.carregarCampos(strOperacao: string);
 var
-   idDiametro:string;
+  idEstaca, idDiametro:string;
 begin
 
  if (strOperacao='I') then txtOPERACAO.caption:='INCLUIR REGISTRO';
@@ -105,13 +117,15 @@ begin
    txtCotaSondagem.Text   :=DataModule1.QryLocal_ObrasFuroscota_sondagem.AsString;
    txtCotaArrasamento.Text:=DataModule1.QryLocal_ObrasFuroscota_arrasamento.AsString;
    idDiametro             :=DataModule1.QryLocal_ObrasFurosiddiametro.AsString;
+   idEstaca :=retornarCampo('zf_diametros','id_estacas_tipos',' WHERE id='+idDiametro,'id');
+   cmbEstaca.KeyValue:=idEstaca;
    cmbDiametro.KeyValue   :=idDiametro;
   end;
 
    txtNomeFuro.Enabled:=strOperacao<>'E';
    txtCotaSondagem.Enabled:=strOperacao<>'E';
    txtCotaArrasamento.Enabled:=strOperacao<>'E';
-   cmbDiametro.Enabled:=strOperacao<>'E';
+   //cmbDiametro.Enabled:=strOperacao<>'E';
 
    if (strOperacao<>'E') then
     begin
@@ -140,7 +154,7 @@ procedure TFrmObrasFurosEdicao.FormActivate(Sender: TObject);
 begin
   inherited;
   if btnSalvar.Visible then
-   cmbDiametro.SetFocus
+   //cmbDiametro.SetFocus
  else
    btnExcluir.SetFocus
  ;
@@ -174,6 +188,7 @@ begin
 
   if (strOperacao='I') then
    begin
+
     strSQL:='INSERT INTO zf_furos ('+
             ' idobra ,    '+
             ' iddiametro,    '+
@@ -190,6 +205,7 @@ begin
    end
   else if (strOperacao='A') then
    begin
+
      strSQL:='UPDATE zf_furos SET '+
              '  iddiametro  = '+ aspas( VirgulaParaPonto(cmbDiametro.KeyValue) )+','+
              '  descricaofuro    = '+ aspas( txtNomeFuro.Text)+','+
@@ -197,6 +213,7 @@ begin
              '  cota_arrasamento        = '+ aspas( VirgulaParaPonto(txtCotaArrasamento.Text))+
              ' WHERE '+
              '  id='+aspas( VirgulaParaPonto(txtID.Text) );
+
    end
   ;
 
@@ -212,6 +229,7 @@ begin
        Locate( 'id', strSQL,[]);
       end;
       carregarCampos( strOperacao );
+      pnCamadas.Visible:=true;
    end else begin
     close;
    end;
@@ -264,6 +282,13 @@ begin
       Open;
     end;
 
+    with qryEstacas do begin
+     open;
+    end;
+
+    with qryDiametros do begin
+      Open;
+    end;
   end;
 
 
@@ -394,6 +419,31 @@ procedure TFrmObrasFurosEdicao.FormShow(Sender: TObject);
 begin
   inherited;
   pnCamadas.Visible:= copy(txtOPERACAO.caption,0,1)<>'I';
+
+end;
+
+procedure TFrmObrasFurosEdicao.dsEstacasDataChange(Sender: TObject;
+  Field: TField);
+  var
+    idEstaca:string;
+begin
+  inherited;
+
+end;
+
+procedure TFrmObrasFurosEdicao.DBEdit1Change(Sender: TObject);
+var
+  idestaca:string;
+begin
+  inherited;
+  idEstaca:=TrimRight(qryEstacasid.AsString);
+  with qryDiametros do begin
+    close;
+    if idEstaca<>'' then begin
+      ParamByName('id').Value:=idEstaca;
+      Open;
+    end;
+  end;
 
 end;
 

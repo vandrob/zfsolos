@@ -1,6 +1,6 @@
 inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
-  Left = 556
-  Top = 213
+  Left = 110
+  Top = 18
   Width = 1133
   Height = 752
   BorderIcons = [biSystemMenu, biMaximize]
@@ -8,8 +8,6 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
   OldCreateOrder = True
   WindowState = wsMaximized
   OnActivate = FormActivate
-  OnClose = FormClose
-  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -618,7 +616,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
         Left = 560
       end
       inherited btnExcluir: TsuiButton
-        Left = 408
+        Left = 384
         OnClick = btnExcluirClick
       end
     end
@@ -629,34 +627,34 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
         Left = 4
         Top = 25
         Width = 1119
-        Height = 160
+        Height = 200
         Align = alTop
         Caption = 'Dados do Furo'
         TabOrder = 0
         object lbl1: TLabel
           Left = 16
-          Top = 128
+          Top = 168
           Width = 100
           Height = 13
           Caption = 'Identificador do Furo:'
         end
         object Label1: TLabel
-          Left = 24
-          Top = 87
-          Width = 45
+          Left = 18
+          Top = 93
+          Width = 75
           Height = 13
-          Caption = 'Di'#226'metro:'
+          Caption = 'Tipo de Estaca:'
         end
         object Label2: TLabel
           Left = 352
-          Top = 128
+          Top = 168
           Width = 94
           Height = 13
           Caption = 'Cota de Sondagem:'
         end
         object Label3: TLabel
           Left = 544
-          Top = 128
+          Top = 168
           Width = 102
           Height = 13
           Caption = 'Cota de Arrasamento:'
@@ -725,40 +723,46 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ParentFont = False
           Visible = False
         end
-        object txtTIPOESTACA: TDBText
-          Left = 128
-          Top = 106
-          Width = 593
-          Height = 17
-          Color = clSilver
-          DataField = 'nome'
-          DataSource = DataModule1.dsDiametros
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
+        object Label4: TLabel
+          Left = 20
+          Top = 129
+          Width = 45
+          Height = 13
+          Caption = 'Di'#226'metro:'
         end
-        object cmbDiametro: TsuiDBLookupComboBox
-          Left = 128
-          Top = 83
-          Width = 593
-          Height = 21
-          KeyField = 'id'
-          ListField = 'diametro;nome'
-          ListSource = DataModule1.dsDiametros
-          TabOrder = 0
-          OnKeyPress = txtNomeFuroKeyPress
-          UIStyle = BlueGlass
-          BorderColor = clBlack
-          ArrowColor = clBlack
-          ButtonColor = 15198183
+        object Label5: TLabel
+          Left = 944
+          Top = 24
+          Width = 8
+          Height = 13
+          Caption = 'id'
+          FocusControl = DBEdit1
+          Visible = False
         end
         object txtCotaSondagem: TsuiNumberEdit
           Left = 463
-          Top = 125
+          Top = 165
+          Width = 68
+          Height = 28
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          Text = '0,00'
+          OnEnter = txtCotaSondagemEnter
+          OnKeyPress = txtNomeFuroKeyPress
+          Mask = '0.00'
+          AutoSelectSigns = 2
+          BorderStyle = bsNone
+        end
+        object txtCotaArrasamento: TsuiNumberEdit
+          Left = 649
+          Top = 165
           Width = 68
           Height = 28
           UIStyle = BlueGlass
@@ -771,27 +775,6 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           ParentFont = False
           TabOrder = 2
           Text = '0,00'
-          OnEnter = txtCotaSondagemEnter
-          OnKeyPress = txtNomeFuroKeyPress
-          Mask = '0.00'
-          AutoSelectSigns = 2
-          BorderStyle = bsNone
-        end
-        object txtCotaArrasamento: TsuiNumberEdit
-          Left = 649
-          Top = 125
-          Width = 68
-          Height = 28
-          UIStyle = BlueGlass
-          BorderColor = clBlack
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-          Text = '0,00'
           OnKeyPress = txtCotaArrasamentoKeyPress
           Mask = '0.00'
           AutoSelectSigns = 2
@@ -799,13 +782,13 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
         end
         object txtNomeFuro: TsuiEdit
           Left = 128
-          Top = 126
+          Top = 166
           Width = 153
           Height = 27
           UIStyle = BlueGlass
           BorderColor = clBlack
           CharCase = ecUpperCase
-          TabOrder = 1
+          TabOrder = 0
           OnEnter = txtNomeFuroEnter
           OnKeyPress = txtNomeFuroKeyPress
         end
@@ -817,16 +800,67 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           UIStyle = BlueGlass
           BorderColor = clBlack
           CharCase = ecUpperCase
-          TabOrder = 4
+          TabOrder = 3
           Visible = False
           OnChange = txtIDChange
+        end
+        object cmbEstaca: TsuiDBLookupComboBox
+          Left = 126
+          Top = 85
+          Width = 593
+          Height = 32
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          KeyField = 'id'
+          ListField = 'nome'
+          ListSource = dsEstacas
+          ParentFont = False
+          TabOrder = 4
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          ArrowColor = clBlack
+          ButtonColor = 15198183
+        end
+        object cmbDiametro: TsuiDBLookupComboBox
+          Left = 126
+          Top = 123
+          Width = 593
+          Height = 32
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          KeyField = 'id'
+          ListField = 'diametro'
+          ListSource = dsDiametros
+          ParentFont = False
+          TabOrder = 5
+          UIStyle = BlueGlass
+          BorderColor = clBlack
+          ArrowColor = clBlack
+          ButtonColor = 15198183
+        end
+        object DBEdit1: TDBEdit
+          Left = 944
+          Top = 40
+          Width = 134
+          Height = 21
+          DataField = 'id'
+          DataSource = dsEstacas
+          TabOrder = 6
+          Visible = False
+          OnChange = DBEdit1Change
         end
       end
       object pnCamadas: TPanel
         Left = 4
-        Top = 185
+        Top = 225
         Width = 1119
-        Height = 440
+        Height = 400
         Align = alClient
         TabOrder = 1
         Visible = False
@@ -834,7 +868,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           Left = 241
           Top = 1
           Width = 40
-          Height = 438
+          Height = 398
           Align = alLeft
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -853,7 +887,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           Left = 41
           Top = 1
           Width = 200
-          Height = 438
+          Height = 398
           UIStyle = BlueGlass
           BorderColor = clBlack
           CaptionFontColor = clWhite
@@ -874,7 +908,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           SideBarWidth = 10
           object navNSPT: TsuiDBNavigator
             Left = 13
-            Top = 405
+            Top = 365
             Width = 184
             Height = 30
             Cursor = crDefault
@@ -888,7 +922,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
             Left = 13
             Top = 24
             Width = 184
-            Height = 381
+            Height = 341
             Align = alClient
             BorderStyle = bsNone
             Color = 15198183
@@ -967,7 +1001,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           Left = 1
           Top = 1
           Width = 40
-          Height = 438
+          Height = 398
           Align = alLeft
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -986,7 +1020,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           Left = 281
           Top = 1
           Width = 392
-          Height = 438
+          Height = 398
           UIStyle = BlueGlass
           BorderColor = clBlack
           CaptionFontColor = clWhite
@@ -1007,7 +1041,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           SideBarWidth = 10
           object suiDBNavigator1: TsuiDBNavigator
             Left = 13
-            Top = 405
+            Top = 365
             Width = 376
             Height = 30
             Cursor = crDefault
@@ -1021,7 +1055,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
             Left = 13
             Top = 24
             Width = 376
-            Height = 381
+            Height = 341
             Align = alClient
             BorderStyle = bsNone
             Color = 15198183
@@ -1161,7 +1195,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
           Left = 673
           Top = 1
           Width = 445
-          Height = 438
+          Height = 398
           UIStyle = BlueGlass
           BorderColor = clBlack
           Caption = 'M'#233'todos de C'#225'lculos'
@@ -1174,7 +1208,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
             Left = 4
             Top = 25
             Width = 437
-            Height = 409
+            Height = 369
             Align = alClient
             UIStyle = BlueGlass
             LeftMargin = 10
@@ -1197,7 +1231,7 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
               Left = 3
               Top = 25
               Width = 431
-              Height = 381
+              Height = 341
               Align = alClient
               BorderStyle = bsNone
               Color = 15198183
@@ -1326,5 +1360,118 @@ inherited FrmObrasFurosEdicao: TFrmObrasFurosEdicao
         end
       end
     end
+  end
+  object dsEstacas: TDataSource
+    DataSet = qryEstacas
+    OnDataChange = dsEstacasDataChange
+    Left = 872
+    Top = 80
+  end
+  object qryEstacas: TZQuery
+    Connection = DataModule1.connMYSQL
+    SQL.Strings = (
+      'SELECT * FROM zf_estacas_tipos order by nome')
+    Params = <>
+    Left = 832
+    Top = 80
+    object qryEstacasid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qryEstacasnome: TStringField
+      FieldName = 'nome'
+      Required = True
+      Size = 500
+    end
+    object qryEstacasf1: TFloatField
+      FieldName = 'f1'
+      Required = True
+    end
+    object qryEstacasf2: TFloatField
+      FieldName = 'f2'
+      Required = True
+    end
+  end
+  object qryDiametros: TZQuery
+    Connection = DataModule1.connMYSQL
+    ReadOnly = True
+    SQL.Strings = (
+      
+        'SELECT * FROM zf_diametros  WHERE id_estacas_tipos=:id ORDER BY ' +
+        'id_estacas_tipos,diametro;')
+    Params = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptUnknown
+        Value = '7'
+      end>
+    Left = 832
+    Top = 120
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'id'
+        ParamType = ptUnknown
+        Value = '7'
+      end>
+    object qryDiametrosid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object qryDiametrosid_estacas_tipos: TIntegerField
+      FieldName = 'id_estacas_tipos'
+      Required = True
+    end
+    object qryDiametrosdiametro: TFloatField
+      FieldName = 'diametro'
+      Required = True
+    end
+    object qryDiametrossecao_1: TFloatField
+      FieldName = 'secao_1'
+      Required = True
+    end
+    object qryDiametrossecao_2: TFloatField
+      FieldName = 'secao_2'
+      Required = True
+    end
+    object qryDiametrosarea: TFloatField
+      FieldName = 'area'
+      Required = True
+    end
+    object qryDiametrosperimetro: TFloatField
+      FieldName = 'perimetro'
+      Required = True
+    end
+    object qryDiametrosmetalica_bitola_letra: TStringField
+      FieldName = 'metalica_bitola_letra'
+      Size = 5
+    end
+    object qryDiametrosmetalica_bitola_secao_1: TFloatField
+      FieldName = 'metalica_bitola_secao_1'
+      Required = True
+    end
+    object qryDiametrosmetalica_bitola_secao_2: TFloatField
+      FieldName = 'metalica_bitola_secao_2'
+      Required = True
+    end
+    object qryDiametrosmetalica_area_bruta: TFloatField
+      FieldName = 'metalica_area_bruta'
+      Required = True
+    end
+    object qryDiametrosmetalica_perimetro: TFloatField
+      FieldName = 'metalica_perimetro'
+      Required = True
+    end
+    object qryDiametrosmetalica_area_plena: TFloatField
+      FieldName = 'metalica_area_plena'
+      Required = True
+    end
+  end
+  object dsDiametros: TDataSource
+    DataSet = qryDiametros
+    OnDataChange = dsEstacasDataChange
+    Left = 872
+    Top = 120
   end
 end

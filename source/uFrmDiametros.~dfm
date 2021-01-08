@@ -663,32 +663,32 @@ inherited FrmDiametros: TFrmDiametros
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica Bitola Letra'
+            FieldName = 'metalica_bitola_letra'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica Bitola Se'#231#227'o 1'
+            FieldName = 'metalica_bitola_secao_1'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica Bitola Se'#231#227'o 2'
+            FieldName = 'metalica_bitola_secao_2'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica '#193'rea Bruta'
+            FieldName = 'metalica_area_bruta'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica Per'#237'metro'
+            FieldName = 'metalica_perimetro'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'Estaca Met'#225'lica '#193'rea Plena'
+            FieldName = 'metalica_area_plena'
             Visible = True
           end>
       end

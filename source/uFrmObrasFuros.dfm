@@ -1,6 +1,6 @@
 inherited FrmObrasFuros: TFrmObrasFuros
-  Left = 562
-  Top = 308
+  Left = 237
+  Top = 74
   Caption = 'FrmObrasFuros'
   ClientHeight = 533
   OldCreateOrder = True

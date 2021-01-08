@@ -697,8 +697,8 @@ object DataModule1: TDataModule1
         Name = 'parIDFURO'
         ParamType = ptUnknown
       end>
-    Left = 264
-    Top = 584
+    Left = 72
+    Top = 640
     ParamData = <
       item
         DataType = ftUnknown
@@ -829,8 +829,8 @@ object DataModule1: TDataModule1
         Name = 'parIDFuro'
         ParamType = ptUnknown
       end>
-    Left = 400
-    Top = 448
+    Left = 176
+    Top = 640
     ParamData = <
       item
         DataType = ftUnknown
@@ -867,8 +867,8 @@ object DataModule1: TDataModule1
   end
   object dsCamadas: TDataSource
     DataSet = qryCamadas
-    Left = 328
-    Top = 584
+    Left = 368
+    Top = 520
   end
   object qryCalculosDecourt: TZQuery
     Connection = connMYSQL
@@ -903,7 +903,7 @@ object DataModule1: TDataModule1
         Name = 'parIDFURO'
         ParamType = ptUnknown
       end>
-    Left = 296
+    Left = 288
     Top = 632
     ParamData = <
       item

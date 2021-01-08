@@ -1,6 +1,6 @@
 object FrmConexao: TFrmConexao
-  Left = 449
-  Top = 177
+  Left = 445
+  Top = 173
   BorderStyle = bsNone
   Caption = 'y'
   ClientHeight = 452

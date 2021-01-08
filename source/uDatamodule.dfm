@@ -1,7 +1,6 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Left = 227
-  Top = 182
+  Left = 312
   Height = 739
   Width = 541
   object connSQLITE: TZConnection
@@ -274,8 +273,8 @@ object DataModule1: TDataModule1
     SQL.Strings = (
       'SELECT * FROM zf_estacas_tipos')
     Params = <>
-    Left = 56
-    Top = 392
+    Left = 80
+    Top = 400
     object qryLocal_Estacas_Tiposid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -350,8 +349,8 @@ object DataModule1: TDataModule1
         ParamType = ptUnknown
         Value = '7'
       end>
-    Left = 288
-    Top = 232
+    Left = 192
+    Top = 376
     ParamData = <
       item
         DataType = ftString
@@ -617,52 +616,6 @@ object DataModule1: TDataModule1
     DataSet = QryLocal_ObrasFuros
     Left = 168
     Top = 552
-  end
-  object qryDiametros: TZQuery
-    Connection = connMYSQL
-    ReadOnly = True
-    SQL.Strings = (
-      'SELECT '
-      ' '#10' d.id,'#10' t.nome,'#10
-      '  d.diametro,'#10' '
-      '  d.id_estacas_tipos '
-      ' '#10'FROM'#10' '
-      '  zf_diametros d              '#13#10#10
-      ' inner join'
-      '  zf_estacas_tipos t on t.id=d.id_estacas_tipos'#10
-      'ORDER BY'#10
-      '  t.nome,d.diametro ')
-    Params = <>
-    Left = 400
-    Top = 376
-    object qryDiametrosid: TIntegerField
-      FieldName = 'id'
-      Required = True
-      Visible = False
-    end
-    object qryDiametrosnome: TStringField
-      DisplayLabel = 'Tipo da Estaca'
-      DisplayWidth = 50
-      FieldName = 'nome'
-      Required = True
-      Size = 500
-    end
-    object qryDiametrosdiametro: TFloatField
-      DisplayLabel = 'Di'#226'metro'
-      FieldName = 'diametro'
-      Required = True
-      DisplayFormat = '###0.00'
-    end
-    object qryDiametrosid_estacas_tipos: TIntegerField
-      FieldName = 'id_estacas_tipos'
-      Required = True
-      Visible = False
-    end
-  end
-  object dsDiametros: TDataSource
-    DataSet = qryDiametros
-    Left = 440
-    Top = 576
   end
   object qryCamadas: TZQuery
     Connection = connMYSQL
